@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.monarchinitiative.gui.MainController">
+   <center>
+       <StackPane fx:id="contentStackPane" alignment="TOP_CENTER" prefHeight="500.0" prefWidth="300.0"
+                  style="-fx-background-color: #ffffff;" BorderPane.alignment="TOP_CENTER">
+           <VBox prefHeight="200.0" prefWidth="100.0">
+               <HBox maxWidth="1000.0" prefHeight="500.0" prefWidth="1000.0">
+                   <TextField fx:id="pmidTextField">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </TextField>
+                   <Button mnemonicParsing="false" onAction="#getPMID" text="Get PubMed">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </Button>
+               </HBox>
+               <HBox prefHeight="100.0" prefWidth="200.0">
+                   <WebView fx:id="mywebview" prefHeight="200.0" prefWidth="200.0"/>
+               </HBox>
+               <HBox prefHeight="100.0" prefWidth="200.0">
+                   <Button mnemonicParsing="false" onAction="#addPMID" text="Add">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </Button>
+                   <CheckBox fx:id="inHouseCB" mnemonicParsing="false" text="in house">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="resourceCB" mnemonicParsing="false" text="Resource">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="clinicalUseCB" mnemonicParsing="false" text="Clinical use">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="phenoGenoAlgCB" mnemonicParsing="false" text="Pheno-geno alg">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="systemsBioAlgCB" mnemonicParsing="false" text="Systems-bio alg">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+               </HBox>
+               <HBox prefHeight="100.0" prefWidth="200.0">
+                   <Button fx:id="retrieveCiting" mnemonicParsing="false" text="Retrieve citing"
+                           onAction="#retrieveCiting">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </Button>
+                   <Button mnemonicParsing="false" text="Show next">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </Button>
+               </HBox>
+           </VBox>
+       </StackPane>
+   </center>
+   <top>
+       <MenuBar maxWidth="1000.0" prefWidth="800.0" BorderPane.alignment="TOP_CENTER">
+           <Menu mnemonicParsing="false" text="File">
+               <MenuItem mnemonicParsing="false" onAction="#newMenuItemAction" text="New">
+                   <accelerator>
+                       <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                   </accelerator>
+               </MenuItem>
+               <MenuItem mnemonicParsing="false" onAction="#openMenuItemAction" text="Open">
+                   <accelerator>
+                       <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                   </accelerator>
+               </MenuItem>
+               <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" onAction="#saveMenuItemAction" text="Save">
+                   <accelerator>
+                       <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                   </accelerator>
+               </MenuItem>
+               <MenuItem mnemonicParsing="false" onAction="#exitMenuItemAction" text="Exit">
+                   <accelerator>
+                       <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                   </accelerator>
+               </MenuItem>
+           </Menu>
+           <Menu mnemonicParsing="false" text="View">
+               <MenuItem mnemonicParsing="false" onAction="#showEditCurrentPublicationMenuItemAction" text="Show / edit current publication" />
+           </Menu>
+           <Menu mnemonicParsing="false" text="Settings">
+               <MenuItem mnemonicParsing="false" onAction="#setResourcesMenuItemAction" text="Set resources" />
+           </Menu>
+           <Menu mnemonicParsing="false" text="Project">
+               <MenuItem id="showCuratedPublicationsMenuItem" fx:id="showCuratedPublicationsMenuItem" mnemonicParsing="false" onAction="#showCuratedPublicationsMenuItemAction" text="Show curated publications" />
+           </Menu>
+           <Menu text="Help">
+               <MenuItem id="helpMenuItem" mnemonicParsing="false" onAction="#helpMenuItemAction" text="Help" />
+           </Menu>
+       </MenuBar>
+   </top>
+</BorderPane>

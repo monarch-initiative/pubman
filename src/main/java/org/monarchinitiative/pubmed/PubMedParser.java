@@ -26,9 +26,9 @@ public class PubMedParser {
      * PubMed Central PMCID: PMC1716137.</code>
      *
      * @param data String with PubMed summary text
-     * @return {@link Result} object.
+     * @return {@link PubMedEntry} object.
      */
-    public static Result parsePubMed(String data) throws PubMedParseException {
+    public static PubMedEntry parsePubMed(String data) throws PubMedParseException {
         String errorString = null;
         String authorlist, title, journal, publicationYear, publicationVolume,
                 publicationPages, pmid;
@@ -119,7 +119,7 @@ public class PubMedParser {
         while (Character.isDigit(data.charAt(pos)))
             pos++;
         pmid = data.substring(0, pos);
-        return new Result(authorlist, title, journal, publicationYear,
+        return new PubMedEntry(authorlist, title, journal, publicationYear,
                 publicationVolume, publicationPages, pmid);
     }
 
@@ -205,68 +205,7 @@ public class PubMedParser {
     }
 
 
-    public static class Result {
 
-        private final String authorList;
-
-        private final String title;
-
-        private final String journal;
-
-        private final String year;
-
-        private final String volume;
-
-        private final String pages;
-
-        private final String pmid;
-
-
-        private Result(String authorList, String title, String journal, String year, String volume, String pages, String pmid) {
-            this.authorList = authorList;
-            this.title = title;
-            this.journal = journal;
-            this.year = year;
-            this.volume = volume;
-            this.pages = pages;
-            this.pmid = pmid;
-        }
-
-
-        public String getAuthorList() {
-            return authorList;
-        }
-
-
-        public String getTitle() {
-            return title;
-        }
-
-
-        public String getJournal() {
-            return journal;
-        }
-
-
-        public String getYear() {
-            return year;
-        }
-
-
-        public String getVolume() {
-            return volume;
-        }
-
-
-        public String getPages() {
-            return pages;
-        }
-
-
-        public String getPmid() {
-            return pmid;
-        }
-    }
 }
 
 /* eof */

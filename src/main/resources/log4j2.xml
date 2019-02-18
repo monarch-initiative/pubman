@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="TRACE">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="[%-5p] %c{1} - %m%n" />
+        </Console>
+        <RollingFile name="File" fileName="lr2pg.log" filePattern="${sys:LOG_PATH}/$${date:yyyy-MM}/app-%d{yyyy-MM-dd-HH}-%i.log.gz">
+            <PatternLayout pattern="[%-5p] %c{1} - %m%n" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="de.charite.compbio.jannovar.data.JannovarDataSerializer" level="error" />
+        <Logger name="org.obolibrary.oboformat.parser.OBOFormatParser" level="error" />
+        <Logger name="org.openrdf.rio.RDFParserRegistry" level="error" />
+        <logger name="uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryInternalsImpl" level="error"/>
+        <logger name="org.obolibrary.oboformat.parser.OBOFormatParser" level="error"/>
+        <logger name="org.monarchinitiative.phenol.io.obo.hpo.HpOboParser" level="error"/>
+        <Root level="trace">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="File" />
+        </Root>
+    </Loggers>
+</Configuration>

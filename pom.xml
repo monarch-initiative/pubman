@@ -99,11 +99,11 @@
         </plugins>
         <resources>
             <resource>
-                <directory>src/main/java</directory>
+                <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*.fxml</include>
-                    <include>**/*.css</include>
-                    <include>**/*.properties</include>
+                    <include>mainview.fxml</include>
+                    <include>*.properties</include>
+                    <include>data/hpo.citations</include>
                 </includes>
             </resource>
             <resource>

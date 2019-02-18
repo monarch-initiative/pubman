@@ -18,14 +18,14 @@ public class PubMan  extends Application {
 
         @Override
         public void start(Stage stage) throws IOException {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("MainView.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/mainview.fxml"));
             stage.setTitle("PubMan");
             stage.setScene(new Scene(root, 800, 500));
             stage.show();
         }
 
         public static void main(String[] args) {
-            launch();
+            launch(args);
         }
 
     }
