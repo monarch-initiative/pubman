@@ -195,21 +195,22 @@ public class MainController implements Initializable {
         logger.trace("updating webview, current pubmed entry is {}", currentPubMedEntry.toString());
         mywebview.setContextMenuEnabled(false);
         mywebengine = mywebview.getEngine();
+        mywebengine.loadContent(getCurrentPubMedHTML());
         mywebengine.setUserDataDirectory(new File(PubManPlatform.getWebEngineUserDataDirectory(), getClass().getCanonicalName()));
-        mywebengine.getLoadWorker().stateProperty().addListener(
-                new ChangeListener() {
-                    @Override
-                    public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                        System.out.println("oldValue: " + oldValue);
-                        System.out.println("newValue: " + newValue);
-
-                        if (newValue == Worker.State.SUCCEEDED) {
-                            //document finished loading
-                        }
-                    }
-                }
-        );
-        mywebengine.load(getCurrentPubMedHTML());
+//        mywebengine.getLoadWorker().stateProperty().addListener(
+//                new ChangeListener() {
+//                    @Override
+//                    public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+//                        System.out.println("oldValue: " + oldValue);
+//                        System.out.println("newValue: " + newValue);
+//
+//                        if (newValue == Worker.State.SUCCEEDED) {
+//                            //document finished loading
+//                        }
+//                    }
+//                }
+//        );
+//        mywebengine.load(getCurrentPubMedHTML());
 
     }
 
