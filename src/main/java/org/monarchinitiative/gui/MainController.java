@@ -196,7 +196,7 @@ public class MainController implements Initializable {
         mywebview.setContextMenuEnabled(false);
         mywebengine = mywebview.getEngine();
         mywebengine.loadContent(getCurrentPubMedHTML());
-//        mywebengine.setUserDataDirectory(new File(PubManPlatform.getWebEngineUserDataDirectory(), getClass().getCanonicalName()));
+        mywebengine.setUserDataDirectory(new File(PubManPlatform.getWebEngineUserDataDirectory(), getClass().getCanonicalName()));
 //        mywebengine.getLoadWorker().stateProperty().addListener(
 //                new ChangeListener() {
 //                    @Override
