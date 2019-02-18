@@ -1,5 +1,8 @@
 package org.monarchinitiative.gui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,6 +30,8 @@ public class MainController implements Initializable {
     @FXML
     WebView mywebview;
 
+    private WebEngine mywebengine;
+
     @FXML private CheckBox inHouseCB;
     @FXML private CheckBox resourceCB;
     @FXML private CheckBox clinicalUseCB;
@@ -38,9 +43,12 @@ public class MainController implements Initializable {
 
     private List<Item> itemList;
 
+    private List<String> toBeFetchedList=null;
+
 
     public void initialize(URL url, ResourceBundle rb) {
         this.itemList = new ArrayList<>();
+        this.toBeFetchedList = new ArrayList<>();
         ingestPubMedEntryList();
     }
 
@@ -185,8 +193,24 @@ public class MainController implements Initializable {
 
     private void updateWebview() {
         logger.trace("updating webview, current pubmed entry is {}", currentPubMedEntry.toString());
-        WebEngine engine = mywebview.getEngine();
-        engine.load(getCurrentPubMedHTML());
+        mywebview.setContextMenuEnabled(false);
+        mywebengine = mywebview.getEngine();
+        mywebengine.setUserDataDirectory(new File(PubManPlatform.getWebEngineUserDataDirectory(), getClass().getCanonicalName()));
+        mywebengine.getLoadWorker().stateProperty().addListener(
+                new ChangeListener() {
+                    @Override
+                    public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                        System.out.println("oldValue: " + oldValue);
+                        System.out.println("newValue: " + newValue);
+
+                        if (newValue == Worker.State.SUCCEEDED) {
+                            //document finished loading
+                        }
+                    }
+                }
+        );
+        mywebengine.load(getCurrentPubMedHTML());
+
     }
 
 
@@ -226,8 +250,9 @@ public class MainController implements Initializable {
         CitationGrabber grabber = new CitationGrabber(this.currentPubMedEntry.getPmid());
         List<String> pmids = grabber.citingPMIDs();
         for (String s : pmids) {
-            logger.trace("Got PMID of citing article " + s);
+            logger.trace("Got PMID of citing article \'" + s +"\'");
         }
+        this.toBeFetchedList.addAll(pmids);
     }
 
 

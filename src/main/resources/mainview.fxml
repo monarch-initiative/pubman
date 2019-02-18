@@ -32,7 +32,7 @@
                    </Button>
                </HBox>
                <HBox prefHeight="100.0" prefWidth="200.0">
-                   <WebView fx:id="mywebview" prefHeight="200.0" prefWidth="200.0"/>
+                   <WebView fx:id="mywebview" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS"/>
                </HBox>
                <HBox prefHeight="100.0" prefWidth="200.0">
                    <Button mnemonicParsing="false" onAction="#addPMID" text="Add">

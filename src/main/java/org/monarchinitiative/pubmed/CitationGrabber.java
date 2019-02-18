@@ -2,6 +2,7 @@ package org.monarchinitiative.pubmed;
 
 
 import com.google.common.collect.ImmutableList;
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -52,16 +53,15 @@ public class CitationGrabber {
                 response.append(inputLine);
             }
             in.close();
-            String resp = response.toString();
+            String resp = response.toString().replaceAll("\\s+","");
             logger.trace("Got back payload {}", resp);
-
             // This is XML but all we need are the <Id>23434893</Id> elements
-            Pattern pattern = Pattern.compile("<Id\\>(\\d+)\\</Id\\>");
-            Matcher matcher = pattern.matcher(resp);
-            while (matcher.matches()) {
-                String pmid = matcher.group(1);
-                logger.trace("Matched {}", pmid);
+            Pattern pat = Pattern.compile("<Id>(\\d+)</Id>");
+            Matcher mat = pat.matcher(resp);
+            while (mat.find()) {
+                String pmid = mat.group(1);
                 builder.add(pmid);
+                System.out.println(pmid);
             }
 
 
