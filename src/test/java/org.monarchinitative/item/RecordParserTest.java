@@ -16,24 +16,11 @@ public class RecordParserTest {
 
     @Test
     void testRegex1() {
-        String hello = "fffI2323dasd";
-        Pattern pat = Pattern.compile(".*\\d+.*");
-        Matcher mat = pat.matcher(hello);
-        assertTrue(mat.find());
-    }
-
-
-
-    @Test
-    void testRegex2() {
-
-        Pattern pat = Pattern.compile("<Id>(\\d+)</Id");
+        Pattern pat = Pattern.compile("<Id>(\\d+)</Id>");
         Matcher mat = pat.matcher(record);
         assertTrue(mat.find());
-        int i=0;
-        while (mat.find()) {
-            System.out.println(mat.group(1));
-        }
     }
+
+
 
 }

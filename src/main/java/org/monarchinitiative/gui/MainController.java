@@ -1,8 +1,5 @@
 package org.monarchinitiative.gui;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,9 +14,7 @@ import org.monarchinitiative.pubmed.*;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MainController implements Initializable {
     private static final Logger logger = LogManager.getLogger();
@@ -43,12 +38,15 @@ public class MainController implements Initializable {
 
     private List<Item> itemList;
 
-    private List<String> toBeFetchedList=null;
+    private Stack<String> toBeFetchedStack =null;
+    /** Set of all PMIDs that are already in our database. Want to skip repeat entries! */
+    private Set<String> currentSeenPmids;
 
 
     public void initialize(URL url, ResourceBundle rb) {
         this.itemList = new ArrayList<>();
-        this.toBeFetchedList = new ArrayList<>();
+        this.toBeFetchedStack = new Stack<>();
+        this.currentSeenPmids = new HashSet<>();
         ingestPubMedEntryList();
     }
 
@@ -77,7 +75,10 @@ public class MainController implements Initializable {
             e.printStackTrace();
             System.exit(1);
         }
+        // Add the PubMed ids of all entries to our seen list
+        itemList.stream().map(Item::getPmid).forEach( p -> this.currentSeenPmids.add(p));
         logger.trace("Got " + itemList.size() + " items");
+
     }
 
 
@@ -158,25 +159,53 @@ public class MainController implements Initializable {
     }
 
     @FXML private void getPMID(ActionEvent e) {
-
-        PubMedSummaryRetriever pmretriever = new PubMedSummaryRetriever();
         String userinput = this.pmidTextField.getText().trim();
-        try {
-            String summary = pmretriever.getSummary(userinput);
+        fetchPmid(userinput);
+        updateWebview();
+        e.consume();
+    }
 
+
+    private void fetchPmid(String pmid) {
+        try {
+            PubMedSummaryRetriever pmretriever = new PubMedSummaryRetriever();
+            String summary  = pmretriever.getSummary(pmid);
             this.currentPubMedEntry = PubMedParser.parsePubMed(summary);
-        }catch (IOException ex) {
-            ex.printStackTrace();
-            this.currentPubMedEntry=null;
-            return;
+
         } catch (PubMedParseException pmex) {
             pmex.printStackTrace();
             this.currentPubMedEntry=null;
             return;
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            this.currentPubMedEntry=null;
+            return;
         }
-        updateWebview();
-        e.consume();
     }
+
+
+
+
+    private String getAlreadyExistsWarning() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<html>");
+        sb.append("<style type=\"text/css\">\n" +
+                " span.bold-red {\n" +
+                "    color: red;\n" +
+                "    font-weight: bold;\n" +
+                "}\n" +
+                " span.blu {\n" +
+                "    color: #4e89a4;\n" +
+                "    font-weight: normal;\n" +
+                "}\n" +
+                "</style>");
+            sb.append("<body><h2>warning</h2>");
+        sb.append("<p>Article already present in our citation database. " +
+                "It was not added a second time</p>");
+        sb.append("</body></html>");
+        return sb.toString();
+    }
+
 
 
     @FXML private void addPMID(ActionEvent e) {
@@ -185,9 +214,15 @@ public class MainController implements Initializable {
         boolean clinical = this.clinicalUseCB.isSelected();
         boolean phenogeno = this.phenoGenoAlgCB.isSelected();
         boolean systemsBio = this.systemsBioAlgCB.isSelected();
+        if (this.currentSeenPmids.contains(currentPubMedEntry.getPmid())) {
+            updateWebview(getAlreadyExistsWarning());
+        } else {
+            this.currentSeenPmids.add(currentPubMedEntry.getPmid());
+        }
         Item item = new Item(this.currentPubMedEntry,inhouse,resource,clinical,phenogeno,systemsBio);
         logger.trace("Adding item {}", item.toLine());
         this.itemList.add(item);
+        updateWebview();
     }
 
 
@@ -197,21 +232,14 @@ public class MainController implements Initializable {
         mywebengine = mywebview.getEngine();
         mywebengine.loadContent(getCurrentPubMedHTML());
         mywebengine.setUserDataDirectory(new File(PubManPlatform.getWebEngineUserDataDirectory(), getClass().getCanonicalName()));
-//        mywebengine.getLoadWorker().stateProperty().addListener(
-//                new ChangeListener() {
-//                    @Override
-//                    public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-//                        System.out.println("oldValue: " + oldValue);
-//                        System.out.println("newValue: " + newValue);
-//
-//                        if (newValue == Worker.State.SUCCEEDED) {
-//                            //document finished loading
-//                        }
-//                    }
-//                }
-//        );
-//        mywebengine.load(getCurrentPubMedHTML());
+    }
 
+    private void updateWebview(String message) {
+        logger.trace("updating webview, current pubmed entry is {}", currentPubMedEntry.toString());
+        mywebview.setContextMenuEnabled(false);
+        mywebengine = mywebview.getEngine();
+        mywebengine.loadContent(message);
+        mywebengine.setUserDataDirectory(new File(PubManPlatform.getWebEngineUserDataDirectory(), getClass().getCanonicalName()));
     }
 
 
@@ -228,13 +256,25 @@ public class MainController implements Initializable {
                 "    font-weight: normal;\n" +
                 "}\n" +
                 "</style>");
-        sb.append("<body><h1>Current Article</h1>");
-        sb.append("<p>Current PMID citation.</p>");
+
         if (this.currentPubMedEntry==null) {
             sb.append("<p>Could not be parsed</p>");
         } else {
+            sb.append("<body><h2>").append(this.currentPubMedEntry.getTitle()).append("</h2>");
             sb.append("<p>").append(this.currentPubMedEntry.toString()).append("</p>");
         }
+        if (this.currentSeenPmids.contains(this.currentPubMedEntry.getPmid())) {
+            sb.append("<p style=\"color:red\">Warning: this article is already in our citation database!</p>");
+        }
+
+
+        sb.append("<h2>Stats</h2>");
+        sb.append("<ul>");
+        sb.append("<li>Number of articles currently in citation database: ").append(String.valueOf(this.itemList.size())).append("</li>");
+        if (! toBeFetchedStack.empty()) {
+            sb.append("<li style=\"color:red\">Number of articles in stack waiting to be checked: ").append(String.valueOf(this.toBeFetchedStack.size())).append("</li>");
+        }
+        sb.append("</ul>");
         sb.append("</body></html>");
         return sb.toString();
     }
@@ -253,10 +293,16 @@ public class MainController implements Initializable {
         for (String s : pmids) {
             logger.trace("Got PMID of citing article \'" + s +"\'");
         }
-        this.toBeFetchedList.addAll(pmids);
+        this.toBeFetchedStack.addAll(pmids);
+        updateWebview();
     }
 
+    @FXML private void showNext(ActionEvent e) {
+        String pmid = toBeFetchedStack.pop();
+        fetchPmid(pmid);
+        updateWebview();
 
+    }
 
 
 }

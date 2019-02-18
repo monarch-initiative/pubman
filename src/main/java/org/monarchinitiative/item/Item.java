@@ -70,6 +70,10 @@ public class Item {
         return new Item(entry,inHouse,resource,clinical,pheno,systems);
     }
 
+    public String getPmid() {
+        return this.entry.getPmid();
+    }
+
 
     public String toLine() {
         String fields[] = new String[12];
