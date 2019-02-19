@@ -21,16 +21,17 @@ public class Item {
     private final boolean crossspecies;
     private final boolean environment;
     private final boolean cancer;
+    private final boolean review;
 
     private final static String TRUE = "T";
     private final static String FALSE = "F";
 
     private final static String [] HEADER_FIELDS = {"authorList", "title","journal", "year", "volume", "pages", "pmid", "inhouse", "resource", "clinical.use","phenogeno.algorithm",
-            "systems.bio.algorithm", "hpo", "monarch", "common.disease", "cross.species","environment","cancer"};
+            "systems.bio.algorithm", "hpo", "monarch", "common.disease", "cross.species","environment","cancer","review"};
 
 
      private Item(PubMedEntry entry, boolean inHouse, boolean resource,boolean clinical, boolean phenoAlg, boolean systemsBio,
-             boolean hpo, boolean monarch, boolean commondis, boolean crossspecies, boolean environment, boolean cancer) {
+             boolean hpo, boolean monarch, boolean commondis, boolean crossspecies, boolean environment, boolean cancer, boolean review) {
          this.entry=entry;
          this.inHouse=inHouse;
          this.resource=resource;
@@ -43,7 +44,7 @@ public class Item {
          this.crossspecies=crossspecies;
          this.environment=environment;
          this.cancer=cancer;
-
+         this.review=review;
      }
 
 
@@ -76,8 +77,9 @@ public class Item {
         boolean crossspecies = fields[15].equals("T");
         boolean environment = fields[16].equals("T");
         boolean cancer = fields[17].equals("T");
+        boolean review = fields[18].equals("T");
         PubMedEntry entry = new PubMedEntry(authors,title,journal,year,volume,pages,pmid);
-        return new Item(entry,inHouse,resource,clinical,pheno,systems,hpo, monarch, commondisease, crossspecies, environment, cancer);
+        return new Item(entry,inHouse,resource,clinical,pheno,systems,hpo, monarch, commondisease, crossspecies, environment, cancer,review);
     }
 
     public String getPmid() {
@@ -86,7 +88,7 @@ public class Item {
 
 
     public String toLine() {
-        String fields[] = new String[18];
+        String fields[] = new String[HEADER_FIELDS.length];
         fields[0] = this.entry.getAuthorList();
         fields[1] = this.entry.getTitle();
         fields[2] = this.entry.getJournal();
@@ -105,6 +107,7 @@ public class Item {
         fields[15] = this.crossspecies ? TRUE : FALSE;
         fields[16] = this.environment ? TRUE : FALSE;
         fields[17] = this.cancer ? TRUE : FALSE;
+        fields[18] = this.review ? TRUE : FALSE;
         return String.join("\t",fields);
     }
 
@@ -123,7 +126,7 @@ public class Item {
         private boolean crossspecies;
         private boolean environment;
         private boolean cancer;
-
+        private boolean review;
 
         public Builder inhouse(boolean b) {
             inHouse=b; return this;
@@ -158,6 +161,9 @@ public class Item {
         public Builder cancer(boolean b) {
             this.cancer=b; return this;
         }
+        public Builder review(boolean b) {
+            this.review=b; return this;
+        }
         public Builder entry(PubMedEntry e) {
             this.entry = e;
             return this;
@@ -175,7 +181,8 @@ public class Item {
             this.database,
             this.crossspecies,
             this.environment,
-            this.cancer);
+            this.cancer,
+            this.review);
 
             return item;
 

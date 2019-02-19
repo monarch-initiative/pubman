@@ -72,6 +72,11 @@
                               <Insets left="10.0" top="10.0" />
                           </HBox.margin>
                       </CheckBox>
+                   <CheckBox fx:id="reviewCB" mnemonicParsing="false" text="Review">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0" />
+                       </HBox.margin>
+                   </CheckBox>
                </children>
             </HBox>
             <HBox prefHeight="43.0" prefWidth="800.0">

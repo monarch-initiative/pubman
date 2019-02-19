@@ -41,6 +41,7 @@ public class MainController implements Initializable {
     @FXML private CheckBox crossSpeciesCB;
     @FXML private CheckBox cancerCB;
     @FXML private CheckBox environmentCB;
+    @FXML private CheckBox reviewCB;
 
     private PubMedEntry currentPubMedEntry=null;
 
@@ -253,6 +254,7 @@ public class MainController implements Initializable {
                 commonDisease(this.commonDiseaseCB.isSelected()).
                 environment(this.environmentCB.isSelected()).
                 cancer(this.cancerCB.isSelected()).
+                review(this.reviewCB.isSelected()).
                 entry(this.currentPubMedEntry);
         Item item = buiilder.build();
         logger.trace("Adding item {}", item.toLine());
@@ -305,7 +307,7 @@ public class MainController implements Initializable {
 
         sb.append("<h2>Stats</h2>");
         sb.append("<ul>");
-        sb.append("<li>Number of articles currently in citation commonDisease: ").append(String.valueOf(this.itemList.size())).append("</li>");
+        sb.append("<li>Number of articles currently in citation database: ").append(String.valueOf(this.itemList.size())).append("</li>");
         if (! toBeFetchedStack.empty()) {
             sb.append("<li style=\"color:red\">Number of articles in stack waiting to be checked: ").append(String.valueOf(this.toBeFetchedStack.size())).append("</li>");
         }
