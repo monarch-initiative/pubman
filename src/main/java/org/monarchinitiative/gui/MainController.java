@@ -301,7 +301,7 @@ public class MainController implements Initializable {
             sb.append("<p>").append(this.currentPubMedEntry.toString()).append("</p>");
         }
         if (this.currentSeenPmids.contains(this.currentPubMedEntry.getPmid())) {
-            sb.append("<p style=\"color:red\">Warning: this article is already in our citation commonDisease!</p>");
+            sb.append("<p style=\"color:red\">Warning: this article is already in our citation database!</p>");
         }
 
 
