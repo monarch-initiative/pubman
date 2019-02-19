@@ -3,7 +3,7 @@ Publication Manager
 
 An app that helps to manage citations of HPO related articles.
 
-![pubman GUI](src/main/resources/pubman.png?raw=true "PubMan")
+![pubman GUI](src/main/resources/img/pubman.png?raw=true "PubMan")
 
 
 To use PubMan, enter the PMID of an article that you want to add to the HPO/Monarch citation database. 
