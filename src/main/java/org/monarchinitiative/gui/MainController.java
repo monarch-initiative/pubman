@@ -69,7 +69,7 @@ public class MainController implements Initializable {
             URL url =  getClass().getClassLoader().getResource("data/hpo.citations");
             if (url==null) {
                 System.err.println("Could not find path to citations file");
-                System.exit(1);
+                return;
             }
 
 
@@ -264,6 +264,10 @@ public class MainController implements Initializable {
 
 
     private void updateWebview() {
+        if (currentPubMedEntry==null) {
+            logger.error("Current pubmed entry is null");
+            return;
+        }
         logger.trace("updating webview, current pubmed entry is {}", currentPubMedEntry.toString());
         mywebview.setContextMenuEnabled(false);
         mywebengine = mywebview.getEngine();

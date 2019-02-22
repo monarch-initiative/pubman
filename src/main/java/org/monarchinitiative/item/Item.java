@@ -1,6 +1,11 @@
 package org.monarchinitiative.item;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.monarchinitiative.pubmed.PubMedEntry;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * #authorList title   journal year    volume  pages   pmid    inhouse resource    clinical.use    phenogeno.algorithm systems.bio.algorithm
@@ -11,40 +16,22 @@ public class Item {
 
     private final PubMedEntry entry;
     private final boolean inHouse;
-    private final boolean resource;
-    private final boolean clinical;
-    private final boolean phenoAlg;
-    private final boolean systemsBio;
     private final boolean hpo;
     private final boolean monarch;
-    private final boolean commondisease;
-    private final boolean crossspecies;
-    private final boolean environment;
-    private final boolean cancer;
-    private final boolean review;
+    private final List<Topic> topiclist;
 
     private final static String TRUE = "T";
     private final static String FALSE = "F";
 
-    private final static String [] HEADER_FIELDS = {"authorList", "title","journal", "year", "volume", "pages", "pmid", "inhouse", "resource", "clinical.use","phenogeno.algorithm",
-            "systems.bio.algorithm", "hpo", "monarch", "common.disease", "cross.species","environment","cancer","review"};
+    private final static String [] HEADER_FIELDS = {"authorList", "title","journal", "year", "volume", "pages", "pmid", "inhouse","hpo", "monarch", "topic.list"};
 
 
-     private Item(PubMedEntry entry, boolean inHouse, boolean resource,boolean clinical, boolean phenoAlg, boolean systemsBio,
-             boolean hpo, boolean monarch, boolean commondis, boolean crossspecies, boolean environment, boolean cancer, boolean review) {
+     private Item(PubMedEntry entry, boolean inHouse,boolean hpo, boolean monarch, List<Topic> topics) {
          this.entry=entry;
          this.inHouse=inHouse;
-         this.resource=resource;
-         this.clinical=clinical;
-         this.phenoAlg=phenoAlg;
-         this.systemsBio=systemsBio;
          this.hpo=hpo;
          this.monarch=monarch;
-         this.commondisease =commondis;
-         this.crossspecies=crossspecies;
-         this.environment=environment;
-         this.cancer=cancer;
-         this.review=review;
+         this.topiclist=topics;
      }
 
 
@@ -67,19 +54,17 @@ public class Item {
         String pages = fields[5];
         String pmid = fields[6];
         boolean inHouse = fields[7].equals("T");
-        boolean resource = fields[8].equals("T");
-        boolean clinical = fields[9].equals("T");
-        boolean pheno = fields[10].equals("T");
-        boolean systems = fields[11].equals("T");
-        boolean hpo = fields[12].equals("T");
-        boolean monarch = fields[13].equals("T");
-        boolean commondisease = fields[14].equals("T");
-        boolean crossspecies = fields[15].equals("T");
-        boolean environment = fields[16].equals("T");
-        boolean cancer = fields[17].equals("T");
-        boolean review = fields[18].equals("T");
+        boolean hpo = fields[8].equals("T");
+        boolean monarch = fields[9].equals("T");
+        String topicstring = fields[10];
+        String[] topics = topicstring.split(";");
+        List<Topic> topiclist = new ArrayList<>();
+        for (String t:topics) {
+            Topic topic = Topic.fromString(t);
+            topiclist.add(topic);
+        }
         PubMedEntry entry = new PubMedEntry(authors,title,journal,year,volume,pages,pmid);
-        return new Item(entry,inHouse,resource,clinical,pheno,systems,hpo, monarch, commondisease, crossspecies, environment, cancer,review);
+        return new Item(entry,inHouse,hpo, monarch, topiclist);
     }
 
     public String getPmid() {
@@ -97,17 +82,9 @@ public class Item {
         fields[5]= this.entry.getPages();
         fields[6] = this.entry.getPmid();
         fields[7] = this.inHouse ? TRUE : FALSE;
-        fields[8] = this.resource ? TRUE : FALSE;
-        fields[9] = this.clinical ? TRUE : FALSE;
-        fields[10] = this.phenoAlg ? TRUE : FALSE;
-        fields[11] = this.systemsBio ? TRUE : FALSE;
-        fields[12] = this.hpo ? TRUE : FALSE;
-        fields[13] = this.monarch ? TRUE : FALSE;
-        fields[14] = this.commondisease ? TRUE : FALSE;
-        fields[15] = this.crossspecies ? TRUE : FALSE;
-        fields[16] = this.environment ? TRUE : FALSE;
-        fields[17] = this.cancer ? TRUE : FALSE;
-        fields[18] = this.review ? TRUE : FALSE;
+        fields[8] = this.hpo ? TRUE : FALSE;
+        fields[9] = this.monarch ? TRUE : FALSE;
+        fields[10] = this.topiclist.stream().map(Topic::toString).collect(Collectors.joining(";"));
         return String.join("\t",fields);
     }
 
@@ -170,24 +147,26 @@ public class Item {
         }
 
         public Item build() {
+            List<Topic> topiclist = new ArrayList<>();
+            if (clinical) topiclist.add(Topic.CLINICAL);
+            if (resource) topiclist.add(Topic.RESOURCE);
+            if (phenoAlg) topiclist.add(Topic.PHENOGENO);
+            if (systemsBio) topiclist.add(Topic.SYSTEMSBIO);
+            if (database) topiclist.add(Topic.COMMONDISEASE);
+            if (crossspecies) topiclist.add(Topic.CROSS_SPECIES);
+            if (environment) topiclist.add(Topic.ENVIRONMENT);
+            if (cancer) topiclist.add(Topic.CANCER);
+            if (review) topiclist.add(Topic.REVIEW);
+
             Item item = new Item(this.entry,
                     this.inHouse,
-                    this.resource,
-            this.clinical,
-            this.phenoAlg,
-            this.systemsBio,
-            this.hpo,
-            this.monarch,
-            this.database,
-            this.crossspecies,
-            this.environment,
-            this.cancer,
-            this.review);
+                    this.hpo,
+                    this.monarch,
+                    topiclist);
 
             return item;
 
         }
-
 
     }
 
