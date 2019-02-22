@@ -25,8 +25,18 @@ but the app shows this right after you enter an article for this first time to k
 Here is the format of the file that the app produces. It is a simple tab separated format that
 can be used to populate a simple database to show on our website etc.
 
+
+The format is simple. The first six fields include all the information about the citation (authorList, title, journal, year, volume, pages, pmid).
+The next is if ``inhouse`` and should be T (for true) if somebody from the Monarch team is a coauthor on the paper.
+The next item is ``hpo`` and indicates that the topic is related in some way to HPO (it should be set to true for any article
+that cites one of our in house papers). The next item is ``monarch``, which should be set to true for any article that
+is related to Monarch but not to the HPO. The final item is ``topic.list``, and contains a list of the topics, in case
+we ever want to offer that feature on our webpage (but which we can exploit with scripts for writing reports etc.)
+
 ```$xslt
-#authorList	title	journal	year	volume	pages	pmid	inhouse	resource	clinical.use	phenogeno.algorithm	systems.bio.algorithm	hpo	monarch	common.disease	cross.species	environment	cancer
-Köhler S, Vasilevsky NA, Engelstad M, Foster E, McMurry J, Aymé S, Baynam G, Bello SM, Boerkoel CF, Boycott KM, Brudno M, Buske OJ, Chinnery PF, Cipriani V, Connell LE, Dawkins HJ, DeMare LE, Devereau AD, de Vries BB, Firth HV, Freson K, Greene D, Hamosh A, Helbig I, Hum C, Jähn JA, James R, Krause R, F Laulederkind SJ, Lochmüller H, Lyon GJ, Ogishima S, Olry A, Ouwehand WH, Pontikos N, Rath A, Schaefer F, Scott RH, Segal M, Sergouniotis PI, Sever R, Smith CL, Straub V, Thompson R, Turner C, Turro E, Veltman MW, Vulliamy T, Yu J, von Ziegenweidt J, Zankl A, Züchner S, Zemojtel T, Jacobsen JO, Groza T, Smedley D, Mungall CJ, Haendel M, Robinson PN	The Human Phenotype Ontology in 2017	Nucleic Acids Res	2017	45(D1)	D865-D876	27899602	T	T	F	F	F	T	F	F	F	F	F
-Fang H, Wu Y, Yang H, Yoon M, Jiménez-Barrón LT, Mittelman D, Robison R, Wang K, Lyon GJ	Whole genome sequencing of one complex pedigree illustrates challenges with genomic medicine	BMC Med Genomics	2017	10(1)	10	28228131	F	F	T	F	F	T	F	F	F	F	F
+#authorList	title	journal	year	volume	pages	pmid	inhouse	hpo	monarch	topic.list
+Jia J, Wang R, An Z, Guo Y, Ni X, Shi T	RDAD: A Machine Learning System to Support Phenotype-Based Rare Disease Diagnosis	Front Genet	2018	9	587	30564269	F	T	F	phenogeno.algorithm
+Dozmorov MG	Reforming disease classification system-are we there yet? Ann Transl Med	2018 Nov;6(Suppl 1):S30	2103	PubMed Central PMCID	 PMC6291543	30613605	F	T	F	review
+Chen Y, Xu R	Context-sensitive network analysis identifies food metabolites associated with Alzheimer's disease: an exploratory study	BMC Med Genomics	2019	12(Suppl 1)	17	30704467	F	T	F	systems.bio.algorithm
+Boudellioua I, Kulmanov M, Schofield PN, Gkoutos GV, Hoehndorf R	DeepPVP: phenotype-based prioritization of causative variants using deep learning	BMC Bioinformatics	2019	20(1)	65	30727941	F	T	F	phenogeno.algorithm
 ```
