@@ -1,6 +1,7 @@
 package org.monarchinitiative.item;
 
-import com.sun.org.apache.regexp.internal.RE;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.monarchinitiative.pubmed.PubMedEntry;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
  * #authorList title   journal year    volume  pages   pmid    inhouse resource    clinical.use    phenogeno.algorithm systems.bio.algorithm
  */
 public class Item {
-
+    private static final Logger logger = LogManager.getLogger();
 
 
     private final PubMedEntry entry;
@@ -32,6 +33,7 @@ public class Item {
          this.hpo=hpo;
          this.monarch=monarch;
          this.topiclist=topics;
+         if (topiclist.isEmpty()) throw new IllegalArgumentException("Need to pass at least one topic (in additional to in-house,hpo,monarch)");
      }
 
 
@@ -40,12 +42,16 @@ public class Item {
     }
 
 
-    public static Item fromLine(String line) {
-        String fields[]=line.trim().split("\t");
+    public static Item fromLine(String line) throws IllegalArgumentException {
+        String[] fields=line.trim().split("\t");
         if (fields.length != HEADER_FIELDS.length) {
-            System.err.println("Bad length of line: " + line.length() + ", " + line);
+            logger.error("Bad length ({} instead of {}) of line: \"{}\"" , fields.length, HEADER_FIELDS.length, line);
+            for (int i=0;i<fields.length;i++) {
+                logger.error("\t{}] {}" , i,fields[i]);
+            }
             return null;
         }
+
         String authors = fields[0];
         String title = fields[1];
         String journal = fields[2];
@@ -73,7 +79,7 @@ public class Item {
 
 
     public String toLine() {
-        String fields[] = new String[HEADER_FIELDS.length];
+        String[] fields = new String[HEADER_FIELDS.length];
         fields[0] = this.entry.getAuthorList();
         fields[1] = this.entry.getTitle();
         fields[2] = this.entry.getJournal();
@@ -158,14 +164,11 @@ public class Item {
             if (cancer) topiclist.add(Topic.CANCER);
             if (review) topiclist.add(Topic.REVIEW);
 
-            Item item = new Item(this.entry,
+            return new Item(this.entry,
                     this.inHouse,
                     this.hpo,
                     this.monarch,
                     topiclist);
-
-            return item;
-
         }
 
     }

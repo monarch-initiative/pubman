@@ -1,7 +1,9 @@
 package org.monarchinitiative.gui;
 
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 /**
@@ -9,7 +11,11 @@ import java.io.IOException;
  * this would be /home/username/.gopher/...
  */
 public class PubManPlatform {
-    public static final String WEB_ENGINE_DIRNAME = "web_engine_user_data";
+    private static final String WEB_ENGINE_DIRNAME = "web_engine_user_data";
+
+    private static final String PUBMAN_FILENAME = "hpocitations.txt";
+
+    private static final String PUBMAN_SETTINGS = "pubman-settings.txt";
 
 
     /**
@@ -73,6 +79,25 @@ public class PubManPlatform {
             default:
                 return null;
         }
+    }
+
+
+    static String getPubManFile() {
+        File dirpath = getPubManDir();
+        String settingsFilePath =  String.format("%s%s%s",dirpath.getAbsolutePath(),File.separator,PUBMAN_SETTINGS);
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(settingsFilePath));
+            String line;
+            while ((line=br.readLine())!=null) {
+                if (line.startsWith("file:")) {
+                    return line.substring(5).trim();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
 
@@ -143,7 +168,7 @@ public class PubManPlatform {
         OSX("Os X"),
         UNKNOWN("Unknown");
 
-        private String name;
+        private final String name;
 
 
         CurrentPlatform(String n) {

@@ -59,23 +59,21 @@ public class MainController implements Initializable {
         this.itemList = new ArrayList<>();
         this.toBeFetchedStack = new Stack<>();
         this.currentSeenPmids = new HashSet<>();
+        this.citationFilePath=PubManPlatform.getPubManFile();
         ingestPubMedEntryList();
     }
 
 
+
+
     private void ingestPubMedEntryList() {
-
+        if (this.citationFilePath==null) {
+            PopupFactory.displayError("Error","Could not find citation file. Please set it using the Edit menu");
+            return;
+        }
         try {
-            URL url =  getClass().getClassLoader().getResource("data/hpo.citations");
-            if (url==null) {
-                System.err.println("Could not find path to citations file");
-                return;
-            }
-
-
-            String path = url.getPath();
-            logger.trace("Reading existing items from {}", path);
-            BufferedReader br = new BufferedReader(new FileReader(path));
+            logger.trace("Reading existing items from {}", this.citationFilePath);
+            BufferedReader br = new BufferedReader(new FileReader(this.citationFilePath));
             String line;
             while ((line=br.readLine())!=null) {
                 if (line.startsWith("#")) continue; // comment
@@ -194,12 +192,8 @@ public class MainController implements Initializable {
             String summary  = pmretriever.getSummary(pmid);
             this.currentPubMedEntry = PubMedParser.parsePubMed(summary);
 
-        } catch (PubMedParseException pmex) {
-            pmex.printStackTrace();
-            this.currentPubMedEntry=null;
-            return false;
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+        } catch (PubMedParseException | IOException exc) {
+            exc.printStackTrace();
             this.currentPubMedEntry=null;
             return false;
         }
@@ -233,9 +227,6 @@ public class MainController implements Initializable {
 
     @FXML private void addPMID(ActionEvent e) {
 
-
-
-
         if (this.currentSeenPmids.contains(currentPubMedEntry.getPmid())) {
             updateWebview(getAlreadyExistsWarning());
             return;
@@ -256,10 +247,16 @@ public class MainController implements Initializable {
                 cancer(this.cancerCB.isSelected()).
                 review(this.reviewCB.isSelected()).
                 entry(this.currentPubMedEntry);
-        Item item = buiilder.build();
-        logger.trace("Adding item {}", item.toLine());
-        this.itemList.add(item);
-        updateWebview();
+        try {
+            Item item = buiilder.build();
+            logger.trace("Adding item {}", item.toLine());
+            this.itemList.add(item);
+            updateWebview();
+        } catch (IllegalArgumentException exc) {
+            PopupFactory.displayError("Error with new item", exc.getMessage());
+            return;
+        }
+       e.consume();
     }
 
 
@@ -311,11 +308,12 @@ public class MainController implements Initializable {
 
         sb.append("<h2>Stats</h2>");
         sb.append("<ul>");
-        sb.append("<li>Number of articles currently in citation database: ").append(String.valueOf(this.itemList.size())).append("</li>");
+        sb.append("<li>Number of articles currently in citation database: ").append(this.itemList.size()).append("</li>");
         if (! toBeFetchedStack.empty()) {
-            sb.append("<li style=\"color:red\">Number of articles in stack waiting to be checked: ").append(String.valueOf(this.toBeFetchedStack.size())).append("</li>");
+            sb.append("<li style=\"color:red\">Number of articles in stack waiting to be checked: ").append(this.toBeFetchedStack.size()).append("</li>");
         }
         sb.append("</ul>");
+        sb.append("<p style=\"color:gray;font-size:10px;\">Citation file: ").append(this.citationFilePath).append("</p>");
         sb.append("</body></html>");
         return sb.toString();
     }
@@ -359,12 +357,10 @@ public class MainController implements Initializable {
         File file = fileChooser.showSaveDialog(null);
         if (file == null) {
             logger.error("Could not get name of file with gene symbols");
-            return;
         } else {
             this.citationFilePath = file.getAbsolutePath();
             logger.info("citation file: "+file.getAbsolutePath());
             saveSettings();
-
         }
     }
 
