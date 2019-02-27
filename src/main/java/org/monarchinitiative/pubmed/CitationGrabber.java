@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * This call to NCBI eUtils grapbs the PMIDs that cite the given article in PubMed
+ * This call to NCBI eUtils grabs the PMIDs that cite the given article in PubMed
  * https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&linkname=pubmed_pubmed_citedin&id=21876726&id=21876761
  */
 public class CitationGrabber {

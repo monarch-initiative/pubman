@@ -334,12 +334,19 @@ public class MainController implements Initializable {
         for (String s : pmids) {
             logger.trace("Got PMID of citing article \'" + s +"\'");
         }
-        this.toBeFetchedStack.addAll(pmids);
+        int alreadySeen=0;
+        for (String pmid : pmids) {
+            if (this.currentSeenPmids.contains(pmid)) { alreadySeen++; continue; }
+            this.toBeFetchedStack.add(pmid);
+        }
+        PopupFactory.displayMessage("Retrieving citations",
+               String.format("Skipping %d citations already present in our database",alreadySeen));
         updateWebview();
     }
 
     @FXML private void showNext(ActionEvent e) {
         String pmid = toBeFetchedStack.pop();
+        logger.trace("About to get next pmid: " + pmid);
         fetchPmid(pmid);
         updateWebview();
     }

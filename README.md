@@ -40,3 +40,13 @@ Dozmorov MG	Reforming disease classification system-are we there yet? Ann Transl
 Chen Y, Xu R	Context-sensitive network analysis identifies food metabolites associated with Alzheimer's disease: an exploratory study	BMC Med Genomics	2019	12(Suppl 1)	17	30704467	F	T	F	systems.bio.algorithm
 Boudellioua I, Kulmanov M, Schofield PN, Gkoutos GV, Hoehndorf R	DeepPVP: phenotype-based prioritization of causative variants using deep learning	BMC Bioinformatics	2019	20(1)	65	30727941	F	T	F	phenogeno.algorithm
 ```
+
+
+# HPO publications
+Our goal in the first round is to gather citations of HPO related articles published by our group for display on the HPO website.
+The following is a list of publications we have processed in this way.
+
+*  Robinson PN, Köhler S, Bauer S, Seelow D, Horn D, Mundlos S. The Human Phenotype Ontology: a tool for annotating and analyzing human hereditary disease.
+  Am J Hum Genet. 2008 Nov;83(5):610-5. PubMed PMID: 18950739
+* Köhler S, Schulz MH, Krawitz P, Bauer S, Dölken S, Ott CE, Mundlos C, Horn D, Mundlos S, Robinson PN. Clinical diagnostics in human genetics with semantic
+  similarity searches in ontologies. Am J Hum Genet. 2009 Oct;85(4):457-64. PubMed PMID: 19800049;
