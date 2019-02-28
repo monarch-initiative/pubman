@@ -49,4 +49,7 @@ The following is a list of publications we have processed in this way.
 *  Robinson PN, Köhler S, Bauer S, Seelow D, Horn D, Mundlos S. The Human Phenotype Ontology: a tool for annotating and analyzing human hereditary disease.
   Am J Hum Genet. 2008 Nov;83(5):610-5. PubMed PMID: 18950739
 * Köhler S, Schulz MH, Krawitz P, Bauer S, Dölken S, Ott CE, Mundlos C, Horn D, Mundlos S, Robinson PN. Clinical diagnostics in human genetics with semantic
-  similarity searches in ontologies. Am J Hum Genet. 2009 Oct;85(4):457-64. PubMed PMID: 19800049;
+  similarity searches in ontologies. Am J Hum Genet. 2009 Oct;85(4):457-64. PubMed PMID: 19800049
+* Robinson PN, Mundlos S. The human phenotype ontology. Clin Genet. 2010 Jun;77(6):525-34. PubMed PMID: 20412080.
+* Gkoutos GV, Mungall C, Dolken S, Ashburner M, Lewis S, Hancock J, Schofield P, Kohler S, Robinson PN. Entity/quality-based logical definitions for the human
+ skeletal phenome using PATO. Conf Proc IEEE Eng Med Biol Soc. 2009;2009:7069-72.  PubMed PMID: 19964203;

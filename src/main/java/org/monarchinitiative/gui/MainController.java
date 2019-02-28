@@ -343,6 +343,10 @@ public class MainController implements Initializable {
     }
 
     @FXML private void showNext(ActionEvent e) {
+        if (toBeFetchedStack.empty()) {
+            PopupFactory.displayMessage("Stack empty!","No more PMIDs to be fetched");
+            return;
+        }
         String pmid = toBeFetchedStack.pop();
         logger.trace("About to get next pmid: " + pmid);
         fetchPmid(pmid);
