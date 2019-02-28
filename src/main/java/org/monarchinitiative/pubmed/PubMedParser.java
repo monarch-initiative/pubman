@@ -1,6 +1,8 @@
 package org.monarchinitiative.pubmed;
 
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,7 +60,7 @@ public class PubMedParser {
             errorString = String.format("Unable to parse the title from the PubMed data (I attempted to find the title after the first and prior to the second period but failed): %s", data);
             throw new PubMedParseException(errorString);
         }
-        currentString = currentString.substring(x + 1);
+        currentString = currentString.substring(x + 1).trim();
         x = currentString.indexOf(".");
         if (x > 0) {
             journal = currentString.substring(0, x).trim();
@@ -94,12 +96,8 @@ public class PubMedParser {
                 publicationYear = year;
             }
             currentString = currentString.substring(x + 1).trim();
-            x = currentString.indexOf(".");
-            if (x < 0) {
-                errorString = String.format("Could not volume/pages in String %s", data);
-                throw new PubMedParseException(errorString);
-            }
-            String[] volumeAndPages = parseVolumeAndPages(currentString.substring(0, x));
+
+            String[] volumeAndPages = parseVolumeAndPages(currentString);
             if (volumeAndPages[0] == null && volumeAndPages[1] == null) {
                 errorString = String.format("Could not volume/pages in String %s", data);
                 throw new PubMedParseException(errorString);
@@ -169,14 +167,31 @@ public class PubMedParser {
 
     /**
      * Look for this:10(11):e1004578.#
+     * Or for this: 15(10). pii: E2072.
      */
-    private static String[] parseVolumeAndPages(String s) {
+    private static String[] parseVolumeAndPages(String s) throws PubMedParseException {
+        int x = s.indexOf(".");
+        if (x < 0) {
+            String errorString = String.format("Could not volume/pages in String %s", s);
+            throw new PubMedParseException(errorString);
+        }
+
+        // look for 15(10). pii: E2072.
+        Pattern pattern = Pattern.compile("(pii: \\w+)\\.");
+        Matcher matcher = pattern.matcher(s);
+        if (matcher.find()) {
+            String pages = matcher.group(1);
+            String volume = s.substring(0,x).trim();
+            return new String[]{volume,pages};
+        }
+        // alternatively, look for this 10(11):e1004578.
+        s=s.substring(0,x);
         String a[] = s.split(":");
         if (a.length == 2) {
             return a;
         }
-        Pattern pattern = Pattern.compile("(\\d+?)\\(\\d+?\\):(.*?)\\.");
-        Matcher matcher = pattern.matcher(s);
+        pattern = Pattern.compile("(\\d+?)\\(\\d+?\\):(.*?)\\.");
+        matcher = pattern.matcher(s);
         if (matcher.find()) {
             return new String[]{matcher.group(0), matcher.group(1)};
         } else {
