@@ -148,3 +148,48 @@ The following is a list of publications we have processed in this way.
   Haendel M, Robinson PN. The Human Phenotype Ontology in 2017. Nucleic Acids Res.
   2017 Jan 4;45(D1):D865-D876. doi: 10.1093/nar/gkw1039. Epub 2016 Nov 28. Review.
   PubMed PMID: 27899602;
+* Robinson PN, Köhler S, Oellrich A; Sanger Mouse Genetics Project, Wang K,
+  Mungall CJ, Lewis SE, Washington N, Bauer S, Seelow D, Krawitz P, Gilissen C,
+  Haendel M, Smedley D. Improved exome prioritization of disease genes through
+  cross-species phenotype comparison. Genome Res. 2014 Feb;24(2):340-8. doi:
+  10.1101/gr.160325.113. Epub 2013 Oct 25. PubMed PMID: 24162188;
+*  Oellrich A; Sanger Mouse Genetics Project, Smedley D. Linking tissues to
+  phenotypes using gene expression profiles. Database (Oxford). 2014 Mar
+  13;2014:bau017. doi: 10.1093/database/bau017. Print 2014. PubMed PMID: 24634472.
+*  Oellrich A, Jacobsen J, Papatheodorou I; Sanger Mouse Genetics Project,
+  Smedley D. Using association rule mining to determine promising secondary
+  phenotyping hypotheses. Bioinformatics. 2014 Jun 15;30(12):i52-59. doi:
+  10.1093/bioinformatics/btu260. PubMed PMID: 24932005;
+* Smedley D, Köhler S, Czeschik JC, Amberger J, Bocchini C, Hamosh A, Veldboer J, Zemojtel T, Robinson PN (2014)
+  Walking the interactome for candidate prioritization in exome sequencing studies of Mendelian diseases.
+  Bioinformatics. 2014 Nov 15;30(22):3215-22. PubMed  PMID: 25078397
+* Smedley D, Robinson PN. Phenotype-driven strategies for exome prioritization
+   of human Mendelian disease genes. Genome Med. 2015 Jul 30;7(1):81. doi:
+   10.1186/s13073-015-0199-2. eCollection 2015. Review. PubMed PMID: 26229552;
+* Haendel MA, Vasilevsky N, Brush M, Hochheiser HS, Jacobsen J, Oellrich A,
+  Mungall CJ, Washington N, Köhler S, Lewis SE, Robinson PN, Smedley D. Disease
+  insights through cross-species phenotype comparisons. Mamm Genome. 2015
+  Oct;26(9-10):548-55. doi: 10.1007/s00335-015-9577-8. Epub 2015 Jun 20. Review.
+  PubMed PMID: 26092691;
+* Smedley D, Jacobsen JO, Jäger M, Köhler S, Holtgrewe M, Schubach M, Siragusa
+  E, Zemojtel T, Buske OJ, Washington NL, Bone WP, Haendel MA, Robinson PN.
+  Next-generation diagnostics and disease-gene discovery with the Exomiser. Nat
+  Protoc. 2015 Dec;10(12):2004-15. doi: 10.1038/nprot.2015.124. Epub 2015 Nov 12.
+  PubMed PMID: 26562621;
+*  Bone WP, Washington NL, Buske OJ, Adams DR, Davis J, Draper D, Flynn ED,
+  Girdea M, Godfrey R, Golas G, Groden C, Jacobsen J, Köhler S, Lee EM, Links AE,
+  Markello TC, Mungall CJ, Nehrebecky M, Robinson PN, Sincan M, Soldatos AG, Tifft
+  CJ, Toro C, Trang H, Valkanas E, Vasilevsky N, Wahl C, Wolfe LA, Boerkoel CF,
+  Brudno M, Haendel MA, Gahl WA, Smedley D. Computational evaluation of exome
+  sequence data using human and model organism phenotypes improves diagnostic
+  efficiency. Genet Med. 2016 Jun;18(6):608-17. doi: 10.1038/gim.2015.137. Epub
+  2015 Nov 12. PubMed PMID: 26562225;
+* Köhler S, Robinson PN. [Diagnostics in human genetics : Integration of
+  phenotypic and genomic data]. Bundesgesundheitsblatt Gesundheitsforschung
+  Gesundheitsschutz. 2017 May;60(5):542-549. doi: 10.1007/s00103-017-2538-5.
+  German. PubMed PMID: 28293716.
+* Maiella S, Olry A, Hanauer M, Lanneau V, Lourghi H, Donadille B, Rodwell C,
+  Köhler S, Seelow D, Jupp S, Parkinson H, Groza T, Brudno M, Robinson PN, Rath A.
+  Harmonising phenomics information for a better interoperability in the rare
+  disease field. Eur J Med Genet. 2018 Nov;61(11):706-714. doi:
+  10.1016/j.ejmg.2018.01.013. Epub 2018 Feb 7. Review. PubMed PMID: 29425702.
