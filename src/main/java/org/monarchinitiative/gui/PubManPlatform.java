@@ -23,7 +23,7 @@ public class PubManPlatform {
      *
      * @throws IOException if it is not possible to create the Gopher directory
      */
-    public static void createPubManDir() throws IOException {
+    private static void createPubManDir() throws IOException {
         File target = getPubManDir();
 
         if (target == null)
@@ -60,7 +60,7 @@ public class PubManPlatform {
      *
      * @return File to directory
      */
-    public static File getPubManDir() {
+    static File getPubManDir() {
         CurrentPlatform platform = figureOutPlatform();
 
         File linuxPath = new File(System.getProperty("user.home") + File.separator + ".pubman");
@@ -81,23 +81,22 @@ public class PubManPlatform {
         }
     }
 
-
-    static String getPubManFile() {
+    /**
+     * This reads the local PubMan settings file and tries to mine it for
+     * the location of the citation file.
+     * @return String representing the path of the PubMan citation file.
+     * @throws IOException if the setting file cannot be found or if it does not contain path to citation file
+     */
+    static String getPubManFile() throws IOException {
         File dirpath = getPubManDir();
         String settingsFilePath =  String.format("%s%s%s",dirpath.getAbsolutePath(),File.separator,PUBMAN_SETTINGS);
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(settingsFilePath));
-            String line;
-            while ((line=br.readLine())!=null) {
-                if (line.startsWith("file:")) {
-                    return line.substring(5).trim();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        BufferedReader br = new BufferedReader(new FileReader(settingsFilePath));
+        String line;
+        while ((line=br.readLine())!=null) {
+            if (line.startsWith("file:")) {
+                return line.substring(5).trim(); }
         }
-        return null;
-
+        throw new IOException("Could not find line with location of citation file");
     }
 
 
@@ -108,7 +107,7 @@ public class PubManPlatform {
      *
      * @return {@link File} leading to <em>existing</em> userData directory or <code>null</code> if {@link #getPubManDir()} returns <code>null</code>
      */
-    public static File getWebEngineUserDataDirectory() {
+    static File getWebEngineUserDataDirectory() {
 
         File gopherDir = getPubManDir();
 
@@ -142,7 +141,7 @@ public class PubManPlatform {
      */
     public static String getAbsoluteLogPath() {
         File dir = getPubManDir();
-        return new String(dir + File.separator + "pubman.log");
+        return dir + File.separator + "pubman.log";
     }
 
 

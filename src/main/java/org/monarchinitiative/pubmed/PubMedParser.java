@@ -40,7 +40,6 @@ public class PubMedParser {
         String currentString;
         /* First element: The authors list, goes up to the first period */
         int x = data.indexOf(".");
-        int pos = 0;
         if (x > 0) {
             authorlist = parseAuthors(data.substring(0, x).trim());
         } else {
@@ -55,7 +54,6 @@ public class PubMedParser {
             title = currentString.substring(0, x).trim();
         } else if (y > 0) { /* title ends in question mark */
             title = currentString.substring(0, y + 1).trim();
-            x = y;
         } else {
             errorString = String.format("Unable to parse the title from the PubMed data (I attempted to find the title after the first and prior to the second period but failed): %s", data);
             throw new PubMedParseException(errorString);
@@ -91,7 +89,7 @@ public class PubMedParser {
             String datestring = currentString.substring(0, x);
             String year = getYear(datestring);
             if (year == null) {
-                throw new PubMedParseException(errorString);
+                throw new PubMedParseException("Could not parse year");
             } else {
                 publicationYear = year;
             }
@@ -113,7 +111,7 @@ public class PubMedParser {
             throw new PubMedParseException(errorString);
         }
         data = data.substring(x + 5).trim();
-        pos = 0;
+        int pos = 0;
         while (Character.isDigit(data.charAt(pos)))
             pos++;
         pmid = data.substring(0, pos);
@@ -157,7 +155,7 @@ public class PubMedParser {
         if (i < 0)
             return null;
         int pos = i + 6;
-        while (s.charAt(pos) != ' ' && pos < len)
+        while (pos < len && s.charAt(pos) != ' ')
             pos++;
         if (s.charAt(pos - 1) == '.')
             pos--;
@@ -185,8 +183,8 @@ public class PubMedParser {
             return new String[]{volume,pages};
         }
         // alternatively, look for this 10(11):e1004578.
-        s=s.substring(0,x);
-        String a[] = s.split(":");
+        String r=s.substring(0,x);
+        String a[] = r.split(":");
         if (a.length == 2) {
             return a;
         }
@@ -194,9 +192,17 @@ public class PubMedParser {
         matcher = pattern.matcher(s);
         if (matcher.find()) {
             return new String[]{matcher.group(0), matcher.group(1)};
-        } else {
-            return new String[]{null, null};
         }
+        // alternatively, look for something like this
+        //2018. doi: 10.1093/database/bay026.
+        x=s.indexOf(".");
+        int y=s.indexOf(".",x+1);
+        if (x>=0 && y>0) {
+            String one = s.substring(0,x).trim();
+            String two = s.substring(x+1,y).trim();
+            return new String[]{one,two};
+        }
+        return new String[]{"n/a","n/a"};
     }
 
 

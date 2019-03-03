@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class PubMedParserTest {
+class PubMedParserTest {
 
 
 
@@ -16,5 +16,13 @@ public class PubMedParserTest {
         PubMedEntry entry =  PubMedParser.parsePubMed(pubmedstring);
         assertNotNull(entry);
         assertEquals(entry.getPages(),"pii: E2072");
+    }
+
+
+    @Test
+    void testNewPub() throws PubMedParseException {
+        String pubmedstring="Köhler S. Improved ontology-based similarity calculations using a study-wise annotation model. Database (Oxford). 2018 Jan 1;2018. doi: 10.1093/database/bay026. PubMed PMID: 29688377; PubMed Central PMCID: PMC5868182.";
+        PubMedEntry entry =  PubMedParser.parsePubMed(pubmedstring);
+        assertNotNull(entry);
     }
 }

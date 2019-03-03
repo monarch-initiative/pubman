@@ -52,4 +52,27 @@ The following is a list of publications we have processed in this way.
   similarity searches in ontologies. Am J Hum Genet. 2009 Oct;85(4):457-64. PubMed PMID: 19800049
 * Robinson PN, Mundlos S. The human phenotype ontology. Clin Genet. 2010 Jun;77(6):525-34. PubMed PMID: 20412080.
 * Gkoutos GV, Mungall C, Dolken S, Ashburner M, Lewis S, Hancock J, Schofield P, Kohler S, Robinson PN. Entity/quality-based logical definitions for the human
- skeletal phenome using PATO. Conf Proc IEEE Eng Med Biol Soc. 2009;2009:7069-72.  PubMed PMID: 19964203;
+ skeletal phenome using PATO. Conf Proc IEEE Eng Med Biol Soc. 2009;2009:7069-72.  PubMed PMID: 19964203.
+* Köhler S, Bauer S, Mungall CJ, Carletti G, Smith CL, Schofield P, Gkoutos GV,  Robinson PN. Improving ontologies by automatic reasoning and evaluation of
+  logical definitions. BMC Bioinformatics. 2011 Oct 27;12:418. PubMed PMID: 22032770.
+* Schulz MH, Köhler S, Bauer S, Robinson PN. Exact score distribution computation for ontological similarity searches. BMC Bioinformatics. 2011 Nov
+  12;12:441. PubMed PMID: 22078312.
+* Köhler S, Doelken SC, Rath A, Aymé S, Robinson PN. Ontological phenotype standards for neurogenetics. Hum Mutat. 2012;33(9):1333-9. PubMed PMID: 22573485.
+* Bauer S, Köhler S, Schulz MH, Robinson PN. Bayesian ontology querying for accurate and noise-tolerant semantic searches. Bioinformatics. 2012 Oct
+  1;28(19):2502-8. PubMed PMID: 22843981.
+*  Köhler S, Doelken SC, Ruef BJ, Bauer S, Washington N, Westerfield M, Gkoutos  G, Schofield P, Smedley D, Lewis SE, Robinson PN, Mungall CJ. Construction and
+  accessibility of a cross-species phenotype ontology along with gene annotations for biomedical research. Version 2. F1000Res. 2013 Feb 1 [revised 2014 Jan
+  1];2:30. doi: 10.12688/f1000research.2-30.v2. eCollection 2013. PubMed PMID:24358873.
+* Doelken SC, Köhler S, Mungall CJ, Gkoutos GV, Ruef BJ, Smith C, Smedley D, Bauer S, Klopocki E, Schofield PN, Westerfield M, Robinson PN, Lewis SE.
+  Phenotypic overlap in the contribution of individual genes to CNV pathogenicity  revealed by cross-species computational analysis of single-gene mutations in
+  humans, mice and zebrafish. Dis Model Mech. 2013 Mar;6(2):358-72. PubMed PMID: 23104991.
+*  Köhler S, Doelken SC, Mungall CJ, Bauer S, Firth HV, Bailleul-Forestier I,
+  Black GC, Brown DL, Brudno M, Campbell J, FitzPatrick DR, Eppig JT, Jackson AP,
+  Freson K, Girdea M, Helbig I, Hurst JA, Jähn J, Jackson LG, Kelly AM, Ledbetter
+  DH, Mansour S, Martin CL, Moss C, Mumford A, Ouwehand WH, Park SM, Riggs ER,
+  Scott RH, Sisodiya S, Van Vooren S, Wapner RJ, Wilkie AO, Wright CF, Vulto-van
+  Silfhout AT, de Leeuw N, de Vries BB, Washingthon NL, Smith CL, Westerfield M,
+  Schofield P, Ruef BJ, Gkoutos GV, Haendel M, Smedley D, Lewis SE, Robinson PN.
+  The Human Phenotype Ontology project: linking molecular biology and disease
+  through phenotype data. Nucleic Acids Res. 2014 Jan;42(Database issue):D966-74.
+  doi: 10.1093/nar/gkt1026. Epub 2013 Nov 11. PubMed PMID: 24217912; (Still needs more)

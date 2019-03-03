@@ -59,7 +59,12 @@ public class MainController implements Initializable {
         this.itemList = new ArrayList<>();
         this.toBeFetchedStack = new Stack<>();
         this.currentSeenPmids = new HashSet<>();
-        this.citationFilePath=PubManPlatform.getPubManFile();
+        try {
+            this.citationFilePath = PubManPlatform.getPubManFile();
+        } catch (IOException e) {
+            PopupFactory.displayException("Error","Could not find citation file", e);
+            return;
+        }
         ingestPubMedEntryList();
     }
 
@@ -358,9 +363,9 @@ public class MainController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.setTitle("Choose location of citation file");
-        File file = fileChooser.showSaveDialog(null);
+        File file = fileChooser.showOpenDialog(null);
         if (file == null) {
-            logger.error("Could not get name of file with gene symbols");
+            logger.error("Could not get name of PubMan citations file.");
         } else {
             this.citationFilePath = file.getAbsolutePath();
             logger.info("citation file: "+file.getAbsolutePath());
