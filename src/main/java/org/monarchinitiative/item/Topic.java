@@ -6,7 +6,7 @@ package org.monarchinitiative.item;
 public enum Topic {
     RESOURCE("resource"), CLINICAL("clinical.use"),PHENOGENO("phenogeno.algorithm"),
     SYSTEMSBIO("systems.bio.algorithm"),COMMONDISEASE("common.disease"),CROSS_SPECIES("cross.species"),
-    ENVIRONMENT("environment"),CANCER("cancer"),REVIEW("review"), UNKNOWN("unknown");
+    ENVIRONMENT("environment"),CANCER("cancer"),REVIEW("review"), EHR("EHR"),CORE("core"),UNKNOWN("unknown");
 
 
     private final String topicname;
@@ -28,6 +28,8 @@ public enum Topic {
             case  "environment": return ENVIRONMENT;
             case "cancer": return CANCER;
             case "review": return REVIEW;
+            case "EHR": return EHR;
+            case "core": return CORE;
             default: return UNKNOWN; // should never happen
         }
 

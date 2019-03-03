@@ -40,74 +40,80 @@
                        </HBox.margin>
                    </Button>
                </HBox>
-            <HBox  prefHeight="31.0" prefWidth="800.0">
-               <children>
-                      <CheckBox fx:id="inHouseCB" mnemonicParsing="false" text="in house">
-                          <HBox.margin>
-                              <Insets left="10.0" top="10.0" />
-                          </HBox.margin>
-                      </CheckBox>
-                  <CheckBox fx:id="hpoCB" mnemonicParsing="false" text="HPO">
-                     <HBox.margin>
-                        <Insets left="10.0" top="10.0" />
-                     </HBox.margin>
-                  </CheckBox>
-                  <CheckBox fx:id="monarchCB" mnemonicParsing="false" text="Monarch">
-                     <HBox.margin>
-                        <Insets left="10.0" top="10.0" />
-                     </HBox.margin>
-                  </CheckBox>
-                  <CheckBox fx:id="crossSpeciesCB" mnemonicParsing="false" text="cross-species">
-                     <HBox.margin>
-                        <Insets left="10.0" top="10.0" />
-                     </HBox.margin>
-                  </CheckBox>
-                      <CheckBox fx:id="clinicalUseCB" mnemonicParsing="false" text="Clinical use">
-                          <HBox.margin>
-                              <Insets left="10.0" top="10.0" />
-                          </HBox.margin>
-                      </CheckBox>
-                      <CheckBox fx:id="resourceCB" mnemonicParsing="false" text="Resource">
-                          <HBox.margin>
-                              <Insets left="10.0" top="10.0" />
-                          </HBox.margin>
-                      </CheckBox>
-                   <CheckBox fx:id="reviewCB" mnemonicParsing="false" text="Review">
+               <HBox prefHeight="31.0" prefWidth="800.0">
+                   <CheckBox fx:id="inHouseCB" mnemonicParsing="false" text="in house">
                        <HBox.margin>
-                           <Insets left="10.0" top="10.0" />
+                           <Insets left="10.0" top="10.0"/>
                        </HBox.margin>
                    </CheckBox>
-               </children>
-            </HBox>
-            <HBox prefHeight="43.0" prefWidth="800.0">
-               <children>
-                      <CheckBox fx:id="phenoGenoAlgCB" mnemonicParsing="false" text="Pheno-geno alg">
-                          <HBox.margin>
-                              <Insets left="10.0" top="10.0" />
-                          </HBox.margin>
-                      </CheckBox>
-                      <CheckBox fx:id="systemsBioAlgCB" mnemonicParsing="false" text="Systems-bio alg">
-                          <HBox.margin>
-                              <Insets left="10.0" top="10.0" />
-                          </HBox.margin>
-                      </CheckBox>
-                  <CheckBox fx:id="commonDiseaseCB" mnemonicParsing="false" text="Common disease">
-                     <HBox.margin>
-                        <Insets left="10.0" top="10.0" />
-                     </HBox.margin>
-                  </CheckBox>
-                  <CheckBox fx:id="environmentCB" mnemonicParsing="false" text="Environment">
-                     <HBox.margin>
-                        <Insets left="10.0" top="10.0" />
-                     </HBox.margin>
-                  </CheckBox>
-                  <CheckBox fx:id="cancerCB" mnemonicParsing="false" text="Cancer">
-                     <HBox.margin>
-                        <Insets left="10.0" top="10.0" />
-                     </HBox.margin>
-                  </CheckBox>
-               </children>
-            </HBox>
+                   <CheckBox fx:id="hpoCB" mnemonicParsing="false" text="HPO">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="monarchCB" mnemonicParsing="false" text="Monarch">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="crossSpeciesCB" mnemonicParsing="false" text="cross-species">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="clinicalUseCB" mnemonicParsing="false" text="Clinical use">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="resourceCB" mnemonicParsing="false" text="Resource">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="reviewCB" mnemonicParsing="false" text="Review">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="coreCB" mnemonicParsing="false" text="Core">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+               </HBox>
+               <HBox prefHeight="43.0" prefWidth="800.0">
+                   <CheckBox fx:id="phenoGenoAlgCB" mnemonicParsing="false" text="Pheno-geno alg">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="systemsBioAlgCB" mnemonicParsing="false" text="Systems-bio alg">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="commonDiseaseCB" mnemonicParsing="false" text="Common disease">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="environmentCB" mnemonicParsing="false" text="Environment">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="cancerCB" mnemonicParsing="false" text="Cancer">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="ehrCB" mnemonicParsing="false" text="EHR">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+               </HBox>
                <HBox maxHeight="154.0" prefHeight="0.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
                    <Button fx:id="retrieveCiting" mnemonicParsing="false" onAction="#retrieveCiting" text="Retrieve citing">
                        <HBox.margin>

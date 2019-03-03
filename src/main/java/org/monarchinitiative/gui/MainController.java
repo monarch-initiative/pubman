@@ -41,6 +41,8 @@ public class MainController implements Initializable {
     @FXML private CheckBox crossSpeciesCB;
     @FXML private CheckBox cancerCB;
     @FXML private CheckBox environmentCB;
+    @FXML private CheckBox ehrCB;
+    @FXML private CheckBox coreCB;
     @FXML private CheckBox reviewCB;
 
     private PubMedEntry currentPubMedEntry=null;
@@ -251,6 +253,8 @@ public class MainController implements Initializable {
                 environment(this.environmentCB.isSelected()).
                 cancer(this.cancerCB.isSelected()).
                 review(this.reviewCB.isSelected()).
+                core(this.coreCB.isSelected()).
+                EHR(this.ehrCB.isSelected()).
                 entry(this.currentPubMedEntry);
         try {
             Item item = buiilder.build();

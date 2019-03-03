@@ -75,4 +75,76 @@ The following is a list of publications we have processed in this way.
   Schofield P, Ruef BJ, Gkoutos GV, Haendel M, Smedley D, Lewis SE, Robinson PN.
   The Human Phenotype Ontology project: linking molecular biology and disease
   through phenotype data. Nucleic Acids Res. 2014 Jan;42(Database issue):D966-74.
-  doi: 10.1093/nar/gkt1026. Epub 2013 Nov 11. PubMed PMID: 24217912; (Still needs more)
+  doi: 10.1093/nar/gkt1026. Epub 2013 Nov 11. PubMed PMID: 24217912.
+* Oellrich A, Koehler S, Washington N; Sanger Mouse Genetic Project, Mungall C,
+  Lewis S, Haendel M, Robinson PN, Smedley D. The influence of disease categories
+  on gene candidate predictions from model organism phenotypes. J Biomed Semantics.
+  2014 Jun 3;5(Suppl 1 Proceedings of the Bio-Ontologies Spec Interest G):S4. doi:
+  10.1186/2041-1480-5-S1-S4. eCollection 2014. PubMed PMID: 25093073
+*  Zemojtel T, Köhler S, Mackenroth L, Jäger M, Hecht J, Krawitz P, Graul-Neumann
+  L, Doelken S, Ehmke N, Spielmann M, Oien NC, Schweiger MR, Krüger U, Frommer G,
+  Fischer B, Kornak U, Flöttmann R, Ardeshirdavani A, Moreau Y, Lewis SE, Haendel
+  M, Smedley D, Horn D, Mundlos S, Robinson PN. Effective diagnosis of genetic
+  disease by computational phenotype analysis of the disease-associated genome. Sci
+  Transl Med. 2014 Sep 3;6(252):252ra123. doi: 10.1126/scitranslmed.3009262. PubMed
+  PMID: 25186178.
+* Ibn-Salem J, Köhler S, Love MI, Chung HR, Huang N, Hurles ME, Haendel M,
+  Washington NL, Smedley D, Mungall CJ, Lewis SE, Ott CE, Bauer S, Schofield PN,
+  Mundlos S, Spielmann M, Robinson PN. Deletions of chromosomal regulatory
+  boundaries are associated with congenital disease. Genome Biol. 2014 Sep
+  4;15(9):423. doi: 10.1186/s13059-014-0423-1. PubMed PMID: 25315429.
+* Köhler S, Schoeneberg U, Czeschik JC, Doelken SC, Hehir-Kwa JY, Ibn-Salem J,
+  Mungall CJ, Smedley D, Haendel MA, Robinson PN. Clinical interpretation of CNVs
+  with cross-species phenotype data. J Med Genet. 2014 Nov;51(11):766-772. doi:
+  10.1136/jmedgenet-2014-102633. Epub 2014 Oct 3. PubMed PMID: 25280750.
+* Groza T, Köhler S, Doelken S, Collier N, Oellrich A, Smedley D, Couto FM,
+  Baynam G, Zankl A, Robinson PN. Automatic concept recognition using the human
+  phenotype ontology reference and test suite corpora. Database (Oxford). 2015 Feb
+  27;2015. pii: bav005. doi: 10.1093/database/bav005. Print 2015. PubMed PMID:
+  25725061;
+* Groza T, Köhler S, Moldenhauer D, Vasilevsky N, Baynam G, Zemojtel T, Schriml
+  LM, Kibbe WA, Schofield PN, Beck T, Vasant D, Brookes AJ, Zankl A, Washington NL,
+  Mungall CJ, Lewis SE, Haendel MA, Parkinson H, Robinson PN. The Human Phenotype
+  Ontology: Semantic Unification of Common and Rare Disease. Am J Hum Genet. 2015
+  Jul 2;97(1):111-24. doi: 10.1016/j.ajhg.2015.05.020. Epub 2015 Jun 25. PubMed
+  PMID: 26119816.
+* Mungall CJ, Washington NL, Nguyen-Xuan J, Condit C, Smedley D, Köhler S, Groza
+  T, Shefchek K, Hochheiser H, Robinson PN, Lewis SE, Haendel MA. Use of model
+  organism and disease databases to support matchmaking for human disease gene
+  discovery. Hum Mutat. 2015 Oct;36(10):979-84. doi: 10.1002/humu.22857. Epub 2015
+  Sep 8. PubMed PMID: 26269093;
+*  Robinson PN, Mungall CJ, Haendel M. Capturing phenotypes for precision
+  medicine. Cold Spring Harb Mol Case Stud. 2015 Oct;1(1):a000372. doi:
+  10.1101/mcs.a000372. PubMed PMID: 27148566;
+*  Meehan TF, Conte N, West DB, Jacobsen JO, Mason J, Warren J, Chen CK, Tudose
+  I, Relac M, Matthews P, Karp N, Santos L, Fiegel T, Ring N, Westerberg H,
+  Greenaway S, Sneddon D, Morgan H, Codner GF, Stewart ME, Brown J, Horner N;
+  International Mouse Phenotyping Consortium, Haendel M, Washington N, Mungall CJ,
+  Reynolds CL, Gallegos J, Gailus-Durner V, Sorg T, Pavlovic G, Bower LR, Moore M,
+  Morse I, Gao X, Tocchini-Valentini GP, Obata Y, Cho SY, Seong JK, Seavitt J,
+  Beaudet AL, Dickinson ME, Herault Y, Wurst W, de Angelis MH, Lloyd KCK, Flenniken
+  AM, Nutter LMJ, Newbigging S, McKerlie C, Justice MJ, Murray SA, Svenson KL,
+  Braun RE, White JK, Bradley A, Flicek P, Wells S, Skarnes WC, Adams DJ, Parkinson
+  H, Mallon AM, Brown SDM, Smedley D. Disease model discovery from 3,328 gene
+  knockouts by The International Mouse Phenotyping Consortium. Nat Genet. 2017
+  Aug;49(8):1231-1238. doi: 10.1038/ng.3901. Epub 2017 Jun 26. PubMed PMID:
+  28650483;
+* Bone WP, Washington NL, Buske OJ, Adams DR, Davis J, Draper D, Flynn ED,
+  Girdea M, Godfrey R, Golas G, Groden C, Jacobsen J, Köhler S, Lee EM, Links AE,
+  Markello TC, Mungall CJ, Nehrebecky M, Robinson PN, Sincan M, Soldatos AG, Tifft
+  CJ, Toro C, Trang H, Valkanas E, Vasilevsky N, Wahl C, Wolfe LA, Boerkoel CF,
+  Brudno M, Haendel MA, Gahl WA, Smedley D. Computational evaluation of exome
+  sequence data using human and model organism phenotypes improves diagnostic
+  efficiency. Genet Med. 2016 Jun;18(6):608-17. doi: 10.1038/gim.2015.137. Epub
+  2015 Nov 12. PubMed PMID: 26562225;
+* Köhler S, Vasilevsky NA, Engelstad M, Foster E, McMurry J, Aymé S, Baynam G,
+  Bello SM, Boerkoel CF, Boycott KM, Brudno M, Buske OJ, Chinnery PF, Cipriani V,
+  Connell LE, Dawkins HJ, DeMare LE, Devereau AD, de Vries BB, Firth HV, Freson K,
+  Greene D, Hamosh A, Helbig I, Hum C, Jähn JA, James R, Krause R, F Laulederkind
+  SJ, Lochmüller H, Lyon GJ, Ogishima S, Olry A, Ouwehand WH, Pontikos N, Rath A,
+  Schaefer F, Scott RH, Segal M, Sergouniotis PI, Sever R, Smith CL, Straub V,
+  Thompson R, Turner C, Turro E, Veltman MW, Vulliamy T, Yu J, von Ziegenweidt J,
+  Zankl A, Züchner S, Zemojtel T, Jacobsen JO, Groza T, Smedley D, Mungall CJ,
+  Haendel M, Robinson PN. The Human Phenotype Ontology in 2017. Nucleic Acids Res.
+  2017 Jan 4;45(D1):D865-D876. doi: 10.1093/nar/gkw1039. Epub 2016 Nov 28. Review.
+  PubMed PMID: 27899602;

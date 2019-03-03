@@ -109,6 +109,8 @@ public class Item {
         private boolean crossspecies;
         private boolean environment;
         private boolean cancer;
+        private boolean EHR;
+        public boolean core;
         private boolean review;
 
         public Builder inhouse(boolean b) {
@@ -116,6 +118,9 @@ public class Item {
         }
         public Builder resource(boolean b) {
             this.resource=b; return this;
+        }
+        public Builder core(boolean b) {
+            core=b; return this;
         }
         public Builder clinical(boolean b) {
             this.clinical=b; return this;
@@ -147,6 +152,10 @@ public class Item {
         public Builder review(boolean b) {
             this.review=b; return this;
         }
+
+        public Builder EHR(boolean b) {
+            this.EHR=b; return this;
+        }
         public Builder entry(PubMedEntry e) {
             this.entry = e;
             return this;
@@ -163,6 +172,7 @@ public class Item {
             if (environment) topiclist.add(Topic.ENVIRONMENT);
             if (cancer) topiclist.add(Topic.CANCER);
             if (review) topiclist.add(Topic.REVIEW);
+            if (EHR) topiclist.add(Topic.EHR);
 
             return new Item(this.entry,
                     this.inHouse,
