@@ -41,6 +41,7 @@ public class MainController implements Initializable {
     @FXML private CheckBox crossSpeciesCB;
     @FXML private CheckBox cancerCB;
     @FXML private CheckBox environmentCB;
+    @FXML private CheckBox exomiserCB;
     @FXML private CheckBox ehrCB;
     @FXML private CheckBox coreCB;
     @FXML private CheckBox reviewCB;
@@ -224,7 +225,7 @@ public class MainController implements Initializable {
                 "}\n" +
                 "</style>");
             sb.append("<body><h2>warning</h2>");
-        sb.append("<p>Article already present in our citation commonDisease. " +
+        sb.append("<p>Article already present in our citation list. " +
                 "It was not added a second time</p>");
         sb.append("</body></html>");
         return sb.toString();
@@ -251,6 +252,7 @@ public class MainController implements Initializable {
                 systemsBio(this.systemsBioAlgCB.isSelected()).
                 commonDisease(this.commonDiseaseCB.isSelected()).
                 environment(this.environmentCB.isSelected()).
+                exomiser(this.exomiserCB.isSelected()).
                 cancer(this.cancerCB.isSelected()).
                 review(this.reviewCB.isSelected()).
                 core(this.coreCB.isSelected()).

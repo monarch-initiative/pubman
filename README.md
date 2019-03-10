@@ -193,3 +193,16 @@ The following is a list of publications we have processed in this way.
   Harmonising phenomics information for a better interoperability in the rare
   disease field. Eur J Med Genet. 2018 Nov;61(11):706-714. doi:
   10.1016/j.ejmg.2018.01.013. Epub 2018 Feb 7. Review. PubMed PMID: 29425702.
+* Smedley D, Schubach M, Jacobsen JOB, Köhler S, Zemojtel T, Spielmann M, Jäger
+  M, Hochheiser H, Washington NL, McMurry JA, Haendel MA, Mungall CJ, Lewis SE,
+  Groza T, Valentini G, Robinson PN. A Whole-Genome Analysis Framework for
+  Effective Identification of Pathogenic Regulatory Variants in Mendelian Disease.
+  Am J Hum Genet. 2016 Sep 1;99(3):595-606. doi: 10.1016/j.ajhg.2016.07.005. Epub
+  2016 Aug 25. PubMed PMID: 27569544
+* Hombach D, Schwarz JM, Knierim E, Schuelke M, Seelow D, Köhler S. Phenotero:
+  Annotate as you write. Clin Genet. 2019 Feb;95(2):287-292. doi:
+  10.1111/cge.13471. Epub 2018 Dec 7. PubMed PMID: 30417324.
+* Köhler S. Improved ontology-based similarity calculations using a study-wise
+  annotation model. Database (Oxford). 2018 Jan 1;2018. doi:
+  10.1093/database/bay026. PubMed PMID: 29688377; PubMed Central PMCID: PMC5868182.
+
