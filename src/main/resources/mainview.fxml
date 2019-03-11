@@ -18,7 +18,7 @@
    <center>
        <StackPane fx:id="contentStackPane" alignment="TOP_CENTER" prefHeight="700.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="TOP_CENTER">
            <VBox prefHeight="200.0" prefWidth="100.0">
-               <HBox maxWidth="1000.0" prefWidth="1000.0">
+               <HBox maxWidth="1200.0" prefWidth="1200.0">
                    <TextField fx:id="pmidTextField">
                        <HBox.margin>
                            <Insets left="10.0" top="10.0" />
@@ -109,6 +109,11 @@
                        </HBox.margin>
                    </CheckBox>
                    <CheckBox fx:id="ehrCB" mnemonicParsing="false" text="EHR">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0"/>
+                       </HBox.margin>
+                   </CheckBox>
+                   <CheckBox fx:id="exomiserCB" mnemonicParsing="false" text="Exomiser use">
                        <HBox.margin>
                            <Insets left="10.0" top="10.0"/>
                        </HBox.margin>

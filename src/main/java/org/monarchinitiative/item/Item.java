@@ -110,6 +110,7 @@ public class Item {
         private boolean environment;
         private boolean cancer;
         private boolean EHR;
+        private boolean exomiser;
         public boolean core;
         private boolean review;
 
@@ -118,6 +119,9 @@ public class Item {
         }
         public Builder resource(boolean b) {
             this.resource=b; return this;
+        }
+        public Builder exomiser(boolean b) {
+            exomiser=b; return this;
         }
         public Builder core(boolean b) {
             core=b; return this;
@@ -172,6 +176,7 @@ public class Item {
             if (environment) topiclist.add(Topic.ENVIRONMENT);
             if (cancer) topiclist.add(Topic.CANCER);
             if (review) topiclist.add(Topic.REVIEW);
+            if (exomiser) topiclist.add(Topic.EXOMISER_USE);
             if (EHR) topiclist.add(Topic.EHR);
 
             return new Item(this.entry,
