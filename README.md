@@ -19,8 +19,29 @@ get a list of citing publications. The red line ``Number of articles in the stac
 will show how many of these articles were found. Use the ``Show next`` button to retrieve data for the next publication
 in the list, and add the publication to the citation database if appropriate.
 
+Publications by our team that are related to the core mission of the HPO project should be marked as ``core``.
+
 Note that the app will keep duplicate entries from being entered and will show the duplication in the GUI (it is possibly a little annoying,
 but the app shows this right after you enter an article for this first time to keep you from clicking too many times).
+
+## Show core publications
+
+The app will show a list of all current ``core`` publications if the uyser clicks on the ``Show core publications`` button.
+
+![pubman GUI](src/main/resources/img/pubman-corepubs.png?raw=true "PubMan")
+
+A similar window will show all cutation citations. It is available in the Project menu (Menu entry ``Show curated publications``).
+
+## Fetch new citations
+
+Periodically, we will want to add new citations to the core publications. Press the ``New citations to core publications``
+button. This step will take about a minute because we are not allow to rapidly send many requests to the eUtils server.
+PubMan will show the publication being cited, which may make it easier to choose the appropriate strategy.
+
+![pubman GUI](src/main/resources/img/pubman-newcitation.png?raw=true "PubMan")
+
+
+
 
 Here is the format of the file that the app produces. It is a simple tab separated format that
 can be used to populate a simple database to show on our website etc.
