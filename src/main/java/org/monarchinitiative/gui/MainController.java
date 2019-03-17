@@ -490,6 +490,11 @@ public class MainController implements Initializable {
         viewer.show();
     }
 
+    @FXML private void showCuratedPublications() {
+        PubViewer viewer = new PubViewer(this.itemList);
+        viewer.show();
+    }
+
     /**
      * This method gets called when user chooses to close Gui. Content of
      * in XML format to platform-dependent default location.

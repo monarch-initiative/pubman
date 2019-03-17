@@ -8,13 +8,14 @@ import org.monarchinitiative.pubmed.PubMedEntry;
 
 import java.util.List;
 
-class CorePubViewer {
+/**
+ * Show all curated publications in a Webview
+ */
+class PubViewer {
+    private final List<Item> citationlist;
 
-    private final List<Item> coreitems;
-
-    CorePubViewer(List<Item> items ){
-        this.coreitems=items;
-
+    PubViewer(List<Item> items ){
+        this.citationlist =items;
     }
 
 
@@ -64,10 +65,10 @@ class CorePubViewer {
     private String getHTML() {
         StringBuilder sb = new StringBuilder();
         sb.append("<html><head><style>").append(getCSS()).append("</style><body><h1>Core Publications</h1>" +
-                    "<p>There are ").append(String.valueOf(coreitems.size())).append(" core publications in the PubMan dabase.</p>");
+                "<p>There are ").append(String.valueOf(citationlist.size())).append(" citations in the PubMan dabase.</p>");
         sb.append("<p><table class=\"redTable\">");
         sb.append("<tr><th>Author</th><th>Year</th><th>Journal</th><th>Title</th></tr>");
-        for (Item item : this.coreitems) {
+        for (Item item : this.citationlist) {
             sb.append(tableRow(item));
         }
         sb.append("</table></p>");
@@ -89,3 +90,4 @@ class CorePubViewer {
 
 
 }
+

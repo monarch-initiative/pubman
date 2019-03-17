@@ -20,7 +20,7 @@ public class PubMan  extends Application {
         public void start(Stage stage) throws IOException {
             Parent root = FXMLLoader.load(getClass().getResource("/mainview.fxml"));
             stage.setTitle("PubMan");
-            stage.setScene(new Scene(root, 800, 700));
+            stage.setScene(new Scene(root, 1000, 800));
             stage.show();
         }
 

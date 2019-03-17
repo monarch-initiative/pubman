@@ -4,7 +4,7 @@
     <groupId>org.monarchinitiative</groupId>
     <artifactId>pubman</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.2</version>
+    <version>0.7.1</version>
     <name>demo</name>
     <url>http://maven.apache.org</url>
 

@@ -177,7 +177,7 @@
                <MenuItem mnemonicParsing="false" onAction="#chooseFileLocationForCitations" text="Set citation file" />
            </Menu>
            <Menu mnemonicParsing="false" text="Project">
-               <MenuItem id="showCuratedPublicationsMenuItem" mnemonicParsing="false" onAction="#showCuratedPublicationsMenuItemAction" text="Show curated publications" />
+               <MenuItem id="showCuratedPublicationsMenuItem" mnemonicParsing="false" onAction="#showCuratedPublications" text="Show curated publications" />
            </Menu>
            <Menu text="Help">
                <MenuItem id="helpMenuItem" mnemonicParsing="false" onAction="#helpMenuItemAction" text="Help" />
