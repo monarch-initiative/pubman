@@ -11,6 +11,7 @@ import javafx.stage.FileChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.monarchinitiative.item.Item;
+import org.monarchinitiative.item.Topic;
 import org.monarchinitiative.pubmed.*;
 
 import java.io.*;
@@ -212,9 +213,8 @@ public class MainController implements Initializable {
 
 
     private String getAlreadyExistsWarning() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<html>");
-        sb.append("<style type=\"text/css\">\n" +
+        return "<html>" +
+                "<style type=\"text/css\">\n" +
                 " span.bold-red {\n" +
                 "    color: red;\n" +
                 "    font-weight: bold;\n" +
@@ -223,15 +223,84 @@ public class MainController implements Initializable {
                 "    color: #4e89a4;\n" +
                 "    font-weight: normal;\n" +
                 "}\n" +
-                "</style>");
-            sb.append("<body><h2>warning</h2>");
-        sb.append("<p>Article already present in our citation list. " +
-                "It was not added a second time</p>");
-        sb.append("</body></html>");
-        return sb.toString();
+                "</style>" +
+                "<body><h2>warning</h2>" +
+                "<p>Article already present in our citation list. " +
+                "It was not added a second time</p>" +
+                "</body></html>";
+    }
+
+    /**
+     * Revise an existing entry (e.g., change its category)
+     */
+    @FXML private void revisePMID(ActionEvent e) {
+        this.currentSeenPmids.add(currentPubMedEntry.getPmid());
+
+        Item.Builder buiilder = new Item.Builder().
+                inhouse(this.inHouseCB.isSelected()).
+                hpo(this.hpoCB.isSelected()).
+                monarch(this.monarchCB.isSelected()).
+                crossspecies(this.crossSpeciesCB.isSelected()).
+                clinical(this.clinicalUseCB.isSelected()).
+                resource(this.resourceCB.isSelected()).
+                phenoAlg(this.phenoGenoAlgCB.isSelected()).
+                systemsBio(this.systemsBioAlgCB.isSelected()).
+                commonDisease(this.commonDiseaseCB.isSelected()).
+                environment(this.environmentCB.isSelected()).
+                exomiser(this.exomiserCB.isSelected()).
+                cancer(this.cancerCB.isSelected()).
+                review(this.reviewCB.isSelected()).
+                core(this.coreCB.isSelected()).
+                EHR(this.ehrCB.isSelected()).
+                entry(this.currentPubMedEntry);
+        try {
+            Item item = buiilder.build();
+            Item previousItem = getCurrentItem(currentPubMedEntry);
+            logger.trace("Updating item {}", item.toLine());
+            // this will replace the current item
+            this.itemList.set(this.itemList.indexOf(previousItem), item);
+            updateWebview();
+        } catch (IllegalArgumentException exc) {
+            PopupFactory.displayError("Error with new item", exc.getMessage());
+            return;
+        }
+        e.consume();
     }
 
 
+    private Item getCurrentItem(PubMedEntry entry) {
+        for (Item item: itemList) {
+            if (item.getPmid().equals(entry.getPmid())) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    /** SHow the categories of the current entry (for existing entries). */
+    @FXML private void showCurrentAnnotations(ActionEvent e) {
+        Item currentItem =  getCurrentItem(this.currentPubMedEntry);
+        if (currentItem==null) {
+            PopupFactory.displayMessage("Error","Could not retrieve item");
+            return;
+        }
+        List<Topic> topics = currentItem.getTopics();
+        this.cancerCB.setSelected(topics.contains(Topic.CANCER));
+        this.crossSpeciesCB.setSelected(topics.contains(Topic.CROSS_SPECIES));
+        this.commonDiseaseCB.setSelected(topics.contains(Topic.COMMONDISEASE));
+        this.ehrCB.setSelected(topics.contains(Topic.EHR));
+        this.resourceCB.setSelected(topics.contains(Topic.RESOURCE));
+        this.phenoGenoAlgCB.setSelected(topics.contains(Topic.PHENOGENO));
+        this.exomiserCB.setSelected(topics.contains(Topic.EXOMISER_USE));
+        this.systemsBioAlgCB.setSelected(topics.contains(Topic.SYSTEMSBIO));
+        this.clinicalUseCB.setSelected(topics.contains(Topic.CLINICAL));
+        this.environmentCB.setSelected(topics.contains(Topic.ENVIRONMENT));
+        this.reviewCB.setSelected(topics.contains(Topic.REVIEW));
+        this.coreCB.setSelected(topics.contains(Topic.CORE));
+        this.inHouseCB.setSelected(currentItem.isInHouse());
+        this.hpoCB.setSelected(currentItem.isHpo());
+        this.monarchCB.setSelected(currentItem.isMonarch());
+    }
 
     @FXML private void addPMID(ActionEvent e) {
 
@@ -384,7 +453,9 @@ public class MainController implements Initializable {
 
 
     private void loadSettings() {
-        File defaultSettingsPath = new File(PubManPlatform.getPubManDir().getAbsolutePath()
+        File pubmandir=PubManPlatform.getPubManDir();
+        Objects.requireNonNull(pubmandir);
+        File defaultSettingsPath = new File(pubmandir.getAbsolutePath()
                 + File.separator + settingsFileName);
         if (!defaultSettingsPath.exists()) {
             File fck = new File(defaultSettingsPath.getAbsolutePath());
@@ -400,8 +471,7 @@ public class MainController implements Initializable {
             while ((line=br.readLine())!=null) {
                 if (line.startsWith("#")) continue;
                 if (line.startsWith("file:")) {
-                    String name=line.substring(5).trim();
-                    this.citationFilePath=name;
+                    this.citationFilePath=line.substring(5).trim();
                 }
             }
         } catch (IOException e) {
@@ -418,7 +488,9 @@ public class MainController implements Initializable {
      * in XML format to platform-dependent default location.
      */
     private void saveSettings() {
-        File defaultSettingsPath = new File(PubManPlatform.getPubManDir().getAbsolutePath()
+        File pubmandir = PubManPlatform.getPubManDir();
+        Objects.requireNonNull(pubmandir);
+        File defaultSettingsPath = new File(pubmandir.getAbsolutePath()
                 + File.separator + settingsFileName);
         if (!PubManPlatform.getPubManDir().exists()) {
             if (!PubManPlatform.getPubManDir().mkdir()) {

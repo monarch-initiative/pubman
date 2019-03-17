@@ -16,7 +16,7 @@
 
 <BorderPane minHeight="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.monarchinitiative.gui.MainController">
    <center>
-       <StackPane fx:id="contentStackPane" alignment="TOP_CENTER" prefHeight="700.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="TOP_CENTER">
+       <StackPane alignment="TOP_CENTER" prefHeight="700.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="TOP_CENTER">
            <VBox prefHeight="200.0" prefWidth="100.0">
                <HBox maxWidth="1200.0" prefWidth="1200.0">
                    <TextField fx:id="pmidTextField">
@@ -35,6 +35,16 @@
                </HBox>
                <HBox prefHeight="8.0" prefWidth="800.0">
                    <Button mnemonicParsing="false" onAction="#addPMID" text="Add">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0" />
+                       </HBox.margin>
+                   </Button>
+                   <Button mnemonicParsing="false" onAction="#revisePMID" text="Revise">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0" />
+                       </HBox.margin>
+                   </Button>
+                   <Button mnemonicParsing="false" onAction="#showCurrentAnnotations" text="Show annotations">
                        <HBox.margin>
                            <Insets left="10.0" top="10.0" />
                        </HBox.margin>
@@ -120,12 +130,12 @@
                    </CheckBox>
                </HBox>
                <HBox maxHeight="154.0" prefHeight="0.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
-                   <Button fx:id="retrieveCiting" mnemonicParsing="false" onAction="#retrieveCiting" text="Retrieve citing">
+                   <Button mnemonicParsing="false" onAction="#retrieveCiting" text="Retrieve citing">
                        <HBox.margin>
                            <Insets bottom="10.0" left="10.0" top="10.0" />
                        </HBox.margin>
                    </Button>
-                   <Button fx:id="showNext" mnemonicParsing="false" onAction="#showNext" text="Show next">
+                   <Button mnemonicParsing="false" onAction="#showNext" text="Show next">
                        <HBox.margin>
                            <Insets left="10.0" top="10.0" />
                        </HBox.margin>
@@ -147,7 +157,7 @@
                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                    </accelerator>
                </MenuItem>
-               <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" onAction="#saveMenuItemAction" text="Save">
+               <MenuItem mnemonicParsing="false" onAction="#saveMenuItemAction" text="Save">
                    <accelerator>
                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                    </accelerator>
@@ -162,7 +172,7 @@
                <MenuItem mnemonicParsing="false" onAction="#chooseFileLocationForCitations" text="Set citation file" />
            </Menu>
            <Menu mnemonicParsing="false" text="Project">
-               <MenuItem id="showCuratedPublicationsMenuItem" fx:id="showCuratedPublicationsMenuItem" mnemonicParsing="false" onAction="#showCuratedPublicationsMenuItemAction" text="Show curated publications" />
+               <MenuItem id="showCuratedPublicationsMenuItem" mnemonicParsing="false" onAction="#showCuratedPublicationsMenuItemAction" text="Show curated publications" />
            </Menu>
            <Menu text="Help">
                <MenuItem id="helpMenuItem" mnemonicParsing="false" onAction="#helpMenuItemAction" text="Help" />

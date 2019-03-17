@@ -41,6 +41,19 @@ public class Item {
         return "#" + String.join("\t", HEADER_FIELDS);
     }
 
+    public boolean isInHouse() {
+        return inHouse;
+    }
+
+    public boolean isHpo() {
+        return hpo;
+    }
+
+    public boolean isMonarch() {
+        return monarch;
+    }
+
+    public List<Topic> getTopics(){ return this.topiclist; }
 
     public static Item fromLine(String line) throws IllegalArgumentException {
         String[] fields=line.trim().split("\t");
@@ -111,7 +124,7 @@ public class Item {
         private boolean cancer;
         private boolean EHR;
         private boolean exomiser;
-        public boolean core;
+        private boolean core;
         private boolean review;
 
         public Builder inhouse(boolean b) {
