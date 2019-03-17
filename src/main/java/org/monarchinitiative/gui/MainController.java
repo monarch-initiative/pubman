@@ -1,5 +1,6 @@
 package org.monarchinitiative.gui;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -51,6 +52,8 @@ public class MainController implements Initializable {
     private PubMedEntry currentPubMedEntry=null;
 
     private List<Item> itemList;
+
+    private Map<String,Item> citedByMap = new HashMap<>();
 
     private Stack<String> toBeFetchedStack =null;
     /** Set of all PMIDs that are already in our commonDisease. Want to skip repeat entries! */
@@ -354,7 +357,7 @@ public class MainController implements Initializable {
     }
 
     private void updateWebview(String message) {
-        logger.trace("updating webview, current pubmed entry is {}", currentPubMedEntry.toString());
+//        logger.trace("updating webview, current pubmed entry is {}", currentPubMedEntry.toString());
         mywebview.setContextMenuEnabled(false);
         mywebengine = mywebview.getEngine();
         mywebengine.loadContent(message);
@@ -384,6 +387,10 @@ public class MainController implements Initializable {
         }
         if (this.currentSeenPmids.contains(this.currentPubMedEntry.getPmid())) {
             sb.append("<p style=\"color:red\">Warning: this article is already in our citation database!</p>");
+        }
+        if (citedByMap.containsKey(currentPubMedEntry.getPmid())) {
+            Item citedItem = citedByMap.get(currentPubMedEntry.getPmid());
+            sb.append(String.format("<p>Cites: %s",citedItem.getEntry().getTitle())).append("</p>");
         }
 
 
@@ -494,6 +501,57 @@ public class MainController implements Initializable {
         PubViewer viewer = new PubViewer(this.itemList);
         viewer.show();
     }
+
+    private String getCurrentNewCitationHTML() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<html>");
+        sb.append("<style type=\"text/css\">\n" +
+                " span.bold-red {\n" +
+                "    color: red;\n" +
+                "    font-weight: bold;\n" +
+                "}\n" +
+                " span.blu {\n" +
+                "    color: #4e89a4;\n" +
+                "    font-weight: normal;\n" +
+                "}\n" +
+                "</style><body>");
+
+
+        sb.append("<h2>Stats</h2>");
+        sb.append("<ul>");
+        sb.append("<li>New citations retrieved: ").append(String.valueOf(toBeFetchedStack.size())).append("</li>");
+        sb.append("<li>Citations already in database: ").append(this.itemList.size()).append("</li>");
+        sb.append("</ul>");
+        sb.append("</body></html>");
+        return sb.toString();
+    }
+
+
+
+    @FXML private void getNewCitations() {
+        citedByMap.clear();
+        List<Item> coreitems = this.itemList.stream().filter(Item::isCore).collect(Collectors.toList());
+        Set<String> newPmids=new HashSet<>();
+        int alreadySeen=0;
+        for (Item item : coreitems) {
+            CitationGrabber grabber = new CitationGrabber(item.getPmid());
+            List<String> citingPmids = grabber.citingPMIDs();
+            for (String pmid : citingPmids) {
+                if (this.currentSeenPmids.contains(pmid)) { alreadySeen++; continue; }
+                this.toBeFetchedStack.add(pmid);
+                citedByMap.put(pmid,item);
+            }
+            Platform.runLater( () -> updateWebview(getCurrentNewCitationHTML()) );
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }
+        PopupFactory.displayMessage("New citations",
+                String.format("Previously seen: %d; new citations: %d",alreadySeen,toBeFetchedStack.size()));
+    }
+
 
     /**
      * This method gets called when user chooses to close Gui. Content of

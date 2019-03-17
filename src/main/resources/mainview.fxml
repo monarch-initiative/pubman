@@ -54,6 +54,11 @@
                            <Insets left="10.0" top="10.0" />
                        </HBox.margin>
                    </Button>
+                   <Button mnemonicParsing="false" onAction="#getNewCitations" text="New citatons of core publications">
+                       <HBox.margin>
+                           <Insets left="10.0" top="10.0" />
+                       </HBox.margin>
+                   </Button>
                </HBox>
                <HBox prefHeight="31.0" prefWidth="800.0">
                    <CheckBox fx:id="inHouseCB" mnemonicParsing="false" text="in house">
