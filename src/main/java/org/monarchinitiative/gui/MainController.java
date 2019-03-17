@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class MainController implements Initializable {
     private static final Logger logger = LogManager.getLogger();
@@ -481,6 +482,12 @@ public class MainController implements Initializable {
             logger.error("Could not read citation file path from settings file");
         }
 
+    }
+
+    @FXML private void showCorePubs() {
+        List<Item> coreitems = this.itemList.stream().filter(Item::isCore).collect(Collectors.toList());
+        CorePubViewer viewer = new CorePubViewer(coreitems);
+        viewer.show();
     }
 
     /**

@@ -36,6 +36,9 @@ public class Item {
          if (topiclist.isEmpty()) throw new IllegalArgumentException("Need to pass at least one topic (in additional to in-house,hpo,monarch)");
      }
 
+    public PubMedEntry getEntry() {
+        return entry;
+    }
 
     public static String getHeaderLine() {
         return "#" + String.join("\t", HEADER_FIELDS);
@@ -52,6 +55,12 @@ public class Item {
     public boolean isMonarch() {
         return monarch;
     }
+
+    public boolean isCore() {
+         return this.topiclist.contains(Topic.CORE);
+    }
+
+
 
     public List<Topic> getTopics(){ return this.topiclist; }
 
