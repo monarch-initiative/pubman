@@ -20,12 +20,12 @@ public class PubMedSummaryRetriever {
     /**
      * This is a template for URL targeted for PubMed's REST API.
      */
-    public static final String URL_TEMPLATE = "https://www.ncbi.nlm.nih.gov/pubmed/%s?report=docsum&format=text";
+    private static final String URL_TEMPLATE = "https://www.ncbi.nlm.nih.gov/pubmed/%s?report=docsum&format=text";
 
     /**
      * PubMed returns a response containing this String, if there is no record associated with given PMID.
      */
-    public static final String NON_EXISTING_PMID = "cannot get document summary";
+    private static final String NON_EXISTING_PMID = "cannot get document summary";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PubMedSummaryRetriever.class);
 

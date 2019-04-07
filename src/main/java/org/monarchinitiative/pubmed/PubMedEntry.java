@@ -64,6 +64,7 @@ public class PubMedEntry {
 
     @Override
     public String toString() {
-        return authorList +" (" + year +") " + title;
+        return authorList +" (" + year +") " + title + ". " + journal + ". " + volume +":" + pages + ". PMID:"+pmid;
+
     }
 }

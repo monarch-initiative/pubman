@@ -2,7 +2,6 @@ package org.monarchinitiative.pubmed;
 
 
 import com.google.common.collect.ImmutableList;
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

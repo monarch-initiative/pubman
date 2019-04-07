@@ -12,6 +12,7 @@ import javafx.stage.FileChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.monarchinitiative.item.Item;
+import org.monarchinitiative.item.ItemQC;
 import org.monarchinitiative.item.Topic;
 import org.monarchinitiative.pubmed.*;
 
@@ -578,6 +579,64 @@ public class MainController implements Initializable {
         }catch(IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    @FXML private void doQC(ActionEvent e) {
+        try {
+            ItemQC itemQC = new ItemQC();
+            for (Item item : this.itemList) {
+                if (! itemQC.check(item)) {
+                    String html = HtmlFactory.getParseErrorHtml(item);
+                    updateWebview(html);
+                    return;
+                }
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        String html = HtmlFactory.qcOK();
+        updateWebview(html);
+        e.consume();
+    }
+
+    @FXML private void replace(ActionEvent e) {
+        ListIterator<Item> iterator = itemList.listIterator();
+        while (iterator.hasNext()) {
+            Item item = iterator.next();
+            if (item.getPmid().equals(this.currentPubMedEntry.getPmid())) {
+                //Replace element
+                //iterator.set("New");
+                System.out.println("We found and replaced the entry");
+                Item.Builder buiilder = new Item.Builder().
+                        inhouse(this.inHouseCB.isSelected()).
+                        hpo(this.hpoCB.isSelected()).
+                        monarch(this.monarchCB.isSelected()).
+                        crossspecies(this.crossSpeciesCB.isSelected()).
+                        clinical(this.clinicalUseCB.isSelected()).
+                        resource(this.resourceCB.isSelected()).
+                        phenoAlg(this.phenoGenoAlgCB.isSelected()).
+                        systemsBio(this.systemsBioAlgCB.isSelected()).
+                        commonDisease(this.commonDiseaseCB.isSelected()).
+                        environment(this.environmentCB.isSelected()).
+                        exomiser(this.exomiserCB.isSelected()).
+                        cancer(this.cancerCB.isSelected()).
+                        review(this.reviewCB.isSelected()).
+                        core(this.coreCB.isSelected()).
+                        EHR(this.ehrCB.isSelected()).
+                        entry(this.currentPubMedEntry);
+                try {
+                    Item newItem = buiilder.build();
+                    iterator.set(newItem);
+                } catch (IllegalArgumentException iae) {
+                    PopupFactory.displayException("Error","Failure to set categories",iae);
+                    return;
+                }
+
+            }
+        }
+        e.consume();
     }
 
 

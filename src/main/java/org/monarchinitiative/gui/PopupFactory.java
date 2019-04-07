@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class PopupFactory {
-    /** Indicates if the entry made by the user is valid and should be transmitted to the main controller.*/
-    private boolean valid=false;
 
     private boolean wasCancelled=false;
 
@@ -211,7 +209,9 @@ public class PopupFactory {
     }
 
 
-    public boolean isValid() { return valid;}
+    public boolean isValid() { /* Indicates if the entry made by the user is valid and should be transmitted to the main controller.*/ /** Indicates if the entry made by the user is valid and should be transmitted to the main controller.*/
+        boolean valid = false;
+        return valid;}
     public boolean wasCancelled() { return wasCancelled; }
 
 

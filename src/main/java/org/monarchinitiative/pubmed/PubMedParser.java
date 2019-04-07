@@ -1,8 +1,6 @@
 package org.monarchinitiative.pubmed;
 
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,16 +48,24 @@ public class PubMedParser {
         currentString = data.substring(x + 1);
         x = currentString.indexOf(".");
         int y = currentString.indexOf("?");
-        if (x > 0) {
+        if (y>0 && y<x) { // title ends in quaestion mark
+            title = currentString.substring(0, y+1).trim();
+            currentString = currentString.substring(y + 1).trim();
+        } else if (x > 0) {
             title = currentString.substring(0, x).trim();
-        } else if (y > 0) { /* title ends in question mark */
-            title = currentString.substring(0, y + 1).trim();
-        } else {
+            currentString = currentString.substring(x + 1).trim();
+        }  else {
             errorString = String.format("Unable to parse the title from the PubMed data (I attempted to find the title after the first and prior to the second period but failed): %s", data);
             throw new PubMedParseException(errorString);
         }
-        currentString = currentString.substring(x + 1).trim();
         x = currentString.indexOf(".");
+        // check if the next string is something like "version 2" and if so append it to the title
+        if (x > 0 && currentString.contains("Version")) {
+            String version = currentString.substring(0,x).trim();
+            title += ". " + version;
+            currentString = currentString.substring(x+1);
+            x=currentString.indexOf(".");
+        }
         if (x > 0) {
             journal = currentString.substring(0, x).trim();
         } else {
