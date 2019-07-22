@@ -1,4 +1,4 @@
-package org.monarchinitiative.gui;
+package org.monarchinitiative.pubman.gui;
 
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;

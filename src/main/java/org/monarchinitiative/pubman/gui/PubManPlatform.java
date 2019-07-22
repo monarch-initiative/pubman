@@ -1,4 +1,4 @@
-package org.monarchinitiative.gui;
+package org.monarchinitiative.pubman.gui;
 
 
 import java.io.BufferedReader;

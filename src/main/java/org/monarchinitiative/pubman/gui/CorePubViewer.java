@@ -1,21 +1,20 @@
-package org.monarchinitiative.gui;
+package org.monarchinitiative.pubman.gui;
 
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.monarchinitiative.item.Item;
-import org.monarchinitiative.pubmed.PubMedEntry;
+import org.monarchinitiative.pubman.item.Item;
+import org.monarchinitiative.pubman.pubmed.PubMedEntry;
 
 import java.util.List;
 
-/**
- * Show all curated publications in a Webview
- */
-class PubViewer {
-    private final List<Item> citationlist;
+class CorePubViewer {
 
-    PubViewer(List<Item> items ){
-        this.citationlist =items;
+    private final List<Item> coreitems;
+
+    CorePubViewer(List<Item> items ){
+        this.coreitems=items;
+
     }
 
 
@@ -65,10 +64,10 @@ class PubViewer {
     private String getHTML() {
         StringBuilder sb = new StringBuilder();
         sb.append("<html><head><style>").append(getCSS()).append("</style><body><h1>Core Publications</h1>" +
-                "<p>There are ").append(String.valueOf(citationlist.size())).append(" citations in the PubMan dabase.</p>");
+                    "<p>There are ").append(String.valueOf(coreitems.size())).append(" core publications in the PubMan dabase.</p>");
         sb.append("<p><table class=\"redTable\">");
         sb.append("<tr><th>Author</th><th>Year</th><th>Journal</th><th>Title</th></tr>");
-        for (Item item : this.citationlist) {
+        for (Item item : this.coreitems) {
             sb.append(tableRow(item));
         }
         sb.append("</table></p>");
@@ -90,4 +89,3 @@ class PubViewer {
 
 
 }
-

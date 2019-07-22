@@ -1,8 +1,8 @@
-package org.monarchinitiative.item;
+package org.monarchinitiative.pubman.item;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.monarchinitiative.pubmed.PubMedEntry;
+import org.monarchinitiative.pubman.pubmed.PubMedEntry;
 
 import java.util.ArrayList;
 import java.util.List;

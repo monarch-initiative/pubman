@@ -1,4 +1,4 @@
-package org.monarchinitiative.gui;
+package org.monarchinitiative.pubman.gui;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;

@@ -1,4 +1,4 @@
-package org.monarchinitiative.gui;
+package org.monarchinitiative.pubman.gui;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -11,10 +11,10 @@ import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.monarchinitiative.item.Item;
-import org.monarchinitiative.item.ItemQC;
-import org.monarchinitiative.item.Topic;
-import org.monarchinitiative.pubmed.*;
+import org.monarchinitiative.pubman.item.Item;
+import org.monarchinitiative.pubman.item.ItemQC;
+import org.monarchinitiative.pubman.item.Topic;
+import org.monarchinitiative.pubman.pubmed.*;
 
 import java.io.*;
 import java.net.URL;

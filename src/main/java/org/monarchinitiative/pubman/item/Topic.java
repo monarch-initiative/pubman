@@ -1,4 +1,4 @@
-package org.monarchinitiative.item;
+package org.monarchinitiative.pubman.item;
 
 /**
  * Enumeration of article topics

@@ -1,7 +1,7 @@
-package org.monarchinitiative.gui;
+package org.monarchinitiative.pubman.gui;
 
-import org.monarchinitiative.item.Item;
-import org.monarchinitiative.pubmed.PubMedEntry;
+import org.monarchinitiative.pubman.item.Item;
+import org.monarchinitiative.pubman.pubmed.PubMedEntry;
 
 class HtmlFactory {
 
