@@ -12,12 +12,12 @@ import javafx.scene.web.WebView;
 class MyBrowser extends Region {
 
     private final WebView browser = new WebView();
-    private final WebEngine webEngine = browser.getEngine();
 
     MyBrowser(String contents) {
         //apply the styles
         getStyleClass().add("browser");
         // load the web page
+        WebEngine webEngine = browser.getEngine();
         webEngine.loadContent(contents);
         //add the web view to the scene
         getChildren().add(browser);
