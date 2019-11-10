@@ -1,4 +1,4 @@
-package org.monarchinitiative.gui;
+package org.monarchinitiative.pubman.gui;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class PopupFactory {
-
-    private boolean wasCancelled=false;
 
     private String stringValue=null;
 
@@ -212,7 +210,9 @@ public class PopupFactory {
     public boolean isValid() { /* Indicates if the entry made by the user is valid and should be transmitted to the main controller.*/ /** Indicates if the entry made by the user is valid and should be transmitted to the main controller.*/
         boolean valid = false;
         return valid;}
-    public boolean wasCancelled() { return wasCancelled; }
+    public boolean wasCancelled() {
+        boolean wasCancelled = false;
+        return wasCancelled; }
 
 
 

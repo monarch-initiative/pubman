@@ -1,4 +1,4 @@
-package org.monarchinitiative;
+package org.monarchinitiative.pubman;
 
 import com.google.inject.Injector;
 import javafx.application.Application;

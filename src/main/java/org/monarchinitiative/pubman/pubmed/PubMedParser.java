@@ -1,4 +1,4 @@
-package org.monarchinitiative.pubmed;
+package org.monarchinitiative.pubman.pubmed;
 
 
 import java.util.regex.Matcher;

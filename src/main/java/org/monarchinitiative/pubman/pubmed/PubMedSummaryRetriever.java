@@ -1,4 +1,4 @@
-package org.monarchinitiative.pubmed;
+package org.monarchinitiative.pubman.pubmed;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
