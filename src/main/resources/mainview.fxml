@@ -54,7 +54,7 @@
                            <Insets left="10.0" top="10.0" />
                        </HBox.margin>
                    </Button>
-                   <Button mnemonicParsing="false" onAction="#getNewCitations" text="New citatons of core publications">
+                   <Button mnemonicParsing="false" onAction="#getNewCitations" text="New citations of core publications">
                        <HBox.margin>
                            <Insets left="10.0" top="10.0" />
                        </HBox.margin>
