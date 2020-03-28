@@ -1089,3 +1089,7 @@ Boycott KM, Vanstone MR, Bulman DE, MacKenzie AE	Rare-disease genetics in the er
 Hoehndorf R, Hancock JM, Hardy NW, Mallon AM, Schofield PN, Gkoutos GV	Analyzing gene expression data in mice with the Neuro Behavior Ontology	Mamm Genome	2014	25(1-2)	32-40	24177753	F	T	F	systems.bio.algorithm
 Renkema KY, Stokman MF, Giles RH, Knoers NV	Next-generation sequencing for research and diagnostics in kidney disease	Nat Rev Nephrol	2014	10(8)	433-44	24914583	F	T	F	review
 Ekawade A, Velinder M, Ward A, DiSera T, Miller C, Qiao Y, Marth G	Genepanel	iobio - an easy to use web tool for generating disease- and phenotype-associated gene lists	2019	12(1)	190	31829207	F	T	F	resource
+Zhang W, Zhang H, Yang H, Li M, Xie Z, Li W	Computational resources associating diseases with genotypes, phenotypes and exposures	Brief Bioinform	2019	20(6)	2098-2115	30102366	F	T	F	review
+Tanaka N, Masuya H	An atlas of evidence-based phenotypic associations across the mouse phenome	Sci Rep	2020	10(1)	3957	32127602	F	F	T	cross.species;review
+Ju M, Short AD, Thompson P, Bakerly ND, Gkoutos GV, Tsaprouni L, Ananiadou S	Annotating and detecting phenotypic information for chronic obstructive pulmonary disease	JAMIA Open	2019	2(2)	261-271	31984360	F	T	F	resource
+Akdemir KC, Le VT, Chandran S, Li Y, Verhaak RG, Beroukhim R, Campbell PJ, Chin L, Dixon JR, Futreal PA; PCAWG Structural Variation Working Group; PCAWG Consortium	Disruption of chromatin folding domains by somatic genomic rearrangements in human cancer	Nat Genet	2020	52(3)	294-305	32024999	F	T	F	resource
