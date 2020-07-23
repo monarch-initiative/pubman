@@ -37,8 +37,10 @@ public class CitationGrabber {
             //add request header
             con.setRequestProperty("User-Agent", USER_AGENT);
             int responseCode = con.getResponseCode();
-            System.out.println("\nSending 'GET' request to URL : " + url);
-            System.out.println("Response Code : " + responseCode);
+            if (responseCode != 200) {
+                logger.error("Got error code for " + url);
+                return List.of();
+            }
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
             StringBuilder response = new StringBuilder();

@@ -1,6 +1,8 @@
 package org.monarchinitiative.pubman.pubmed;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
@@ -18,7 +20,7 @@ import java.util.regex.Pattern;
 import static java.nio.charset.Charset.defaultCharset;
 
 public class PubmedXmlParser {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(PubmedXmlParser.class);
     private String journal;
     private List<String> authorlist;
     /** Note that the lastAuthor element is also included in the authors so we do not need to use it.
@@ -125,12 +127,10 @@ public class PubmedXmlParser {
                             case "HasAbstract":
                             case "ELocationID":
                             case "SO":
+                            case "received":
                                 break; // skip
                             default:
-                                System.out.println("Coud not find " + name);
-                                System.exit(1);
-
-
+                                LOGGER.error("Coud not find PubMed XML element: " + name);
 
                         }
                     }

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * provided PMID. Use {@link #getSummary(String)} method to get the summary text.
  */
 public class PubMedSummaryRetriever {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(PubMedSummaryRetriever.class);
     /**
      * This is a template for URL targeted for PubMed's REST API.
      */
@@ -28,7 +28,7 @@ public class PubMedSummaryRetriever {
      */
     private static final String NON_EXISTING_PMID = "cannot get document summary";
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PubMedSummaryRetriever.class);
+
 
     private final Function<String, InputStream> connectionFactory;
 
