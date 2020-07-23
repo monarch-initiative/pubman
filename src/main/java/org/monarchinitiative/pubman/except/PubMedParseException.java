@@ -1,10 +1,10 @@
-package org.monarchinitiative.pubman.pubmed;
+package org.monarchinitiative.pubman.except;
 
 
 /**
  * @author <a href="mailto:daniel.danis@jax.org">Daniel Danis</a>
  */
-public class PubMedParseException extends Exception {
+public class PubMedParseException extends PubmanException {
 
     public PubMedParseException() {
     }
@@ -16,6 +16,6 @@ public class PubMedParseException extends Exception {
 
 
     public PubMedParseException(Throwable cause) {
-        super(cause);
+        super(cause.getMessage());
     }
 }

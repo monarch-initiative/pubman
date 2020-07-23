@@ -1,5 +1,6 @@
 package org.monarchinitiative.pubman.pubmed;
 
+import org.monarchinitiative.pubman.except.PubmanException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +21,7 @@ public class PubMedSummaryRetriever {
     /**
      * This is a template for URL targeted for PubMed's REST API.
      */
-    private static final String URL_TEMPLATE = "https://www.ncbi.nlm.nih.gov/pubmed/%s?report=docsum&format=text";
+    private static final String URL_TEMPLATE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=%s&retmode=xml";
 
     /**
      * PubMed returns a response containing this String, if there is no record associated with given PMID.
@@ -52,14 +53,14 @@ public class PubMedSummaryRetriever {
      * @return String with summary text if the retrieval was successful
      * @throws IOException if retrieval fails
      */
-    public static String getSummary(InputStream is, String pmid) throws IOException {
+    public static String getSummary(InputStream is, String pmid) throws PubmanException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         String htmlResponse = reader.lines().collect(Collectors.joining(" "));
 
         if (htmlResponse.contains(NON_EXISTING_PMID)) { // the entry for submitted pmid doesn't exist.
-            throw new IOException("PMID " + pmid + " is not associated with any publication on Pubmed");
+            throw new PubmanException("PMID " + pmid + " is not associated with any publication on Pubmed");
         } else {
-            return extractContent(htmlResponse);
+            return htmlResponse;
         }
     }
 
@@ -69,10 +70,13 @@ public class PubMedSummaryRetriever {
      * @param payload String with HTML page
      * @return String with extracted
      */
-    private static String extractContent(String payload) {
+    private static String extractContent(String payload) throws PubmanException {
         int start, stop;
         start = payload.indexOf("<pre>") + 5;
         stop = payload.indexOf("</pre>");
+        if (stop < 0) {
+            throw new PubmanException(String.format("Could not extract content from PMID: %s", payload));
+        }
         String content = payload.substring(start, stop);
         return content.replaceAll("\n", "").trim();
     }
@@ -91,9 +95,11 @@ public class PubMedSummaryRetriever {
         };
     }
 
-    public String getSummary(String pmid) throws IOException {
+    public String getSummary(String pmid) throws PubmanException {
         try (InputStream is = connectionFactory.apply(pmid)) {
             return getSummary(is, pmid);
+        } catch (IOException e) {
+            throw new PubmanException(e.getMessage());
         }
     }
 }

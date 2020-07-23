@@ -1,6 +1,8 @@
 package org.monarchinitiative.pubman.pubmed;
 
 
+import org.monarchinitiative.pubman.except.PubMedParseException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,7 +31,7 @@ public class PubMedParser {
      * @return {@link PubMedEntry} object.
      */
     public static PubMedEntry parsePubMed(String data) throws PubMedParseException {
-        String errorString = null;
+        String errorString;
         String authorlist, title, journal, publicationYear, publicationVolume,
                 publicationPages, pmid;
 
@@ -190,7 +192,7 @@ public class PubMedParser {
         }
         // alternatively, look for this 10(11):e1004578.
         String r=s.substring(0,x);
-        String a[] = r.split(":");
+        String[] a = r.split(":");
         if (a.length == 2) {
             return a;
         }

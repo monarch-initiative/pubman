@@ -11,6 +11,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.monarchinitiative.pubman.except.PubmanException;
 import org.monarchinitiative.pubman.item.Item;
 import org.monarchinitiative.pubman.item.ItemQC;
 import org.monarchinitiative.pubman.item.Topic;
@@ -204,14 +205,14 @@ public class MainController implements Initializable {
         try {
             PubMedSummaryRetriever pmretriever = new PubMedSummaryRetriever();
             String summary  = pmretriever.getSummary(pmid);
-            this.currentPubMedEntry = PubMedParser.parsePubMed(summary);
-
-        } catch (PubMedParseException | IOException exc) {
+            //this.currentPubMedEntry = PubMedParser.parsePubMed(summary);
+            PubmedXmlParser xmlParser = new PubmedXmlParser(summary);
+            this.currentPubMedEntry = xmlParser.getCitation(); // can return null
+        } catch (PubmanException exc) {
             exc.printStackTrace();
             this.currentPubMedEntry=null;
-            return false;
         }
-        return true;
+        return  this.currentPubMedEntry != null;
     }
 
 
@@ -504,9 +505,8 @@ public class MainController implements Initializable {
     }
 
     private String getCurrentNewCitationHTML() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<html>");
-        sb.append("<style type=\"text/css\">\n" +
+        String sb = "<html>" +
+                "<style type=\"text/css\">\n" +
                 " span.bold-red {\n" +
                 "    color: red;\n" +
                 "    font-weight: bold;\n" +
@@ -515,16 +515,14 @@ public class MainController implements Initializable {
                 "    color: #4e89a4;\n" +
                 "    font-weight: normal;\n" +
                 "}\n" +
-                "</style><body>");
-
-
-        sb.append("<h2>Stats</h2>");
-        sb.append("<ul>");
-        sb.append("<li>New citations retrieved: ").append(String.valueOf(toBeFetchedStack.size())).append("</li>");
-        sb.append("<li>Citations already in database: ").append(this.itemList.size()).append("</li>");
-        sb.append("</ul>");
-        sb.append("</body></html>");
-        return sb.toString();
+                "</style><body>" +
+                "<h2>Stats</h2>" +
+                "<ul>" +
+                "<li>New citations retrieved: " + String.valueOf(toBeFetchedStack.size()) + "</li>" +
+                "<li>Citations already in database: " + this.itemList.size() + "</li>" +
+                "</ul>" +
+                "</body></html>";
+        return sb;
     }
 
 

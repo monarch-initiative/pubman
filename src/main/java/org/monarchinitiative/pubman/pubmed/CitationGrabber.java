@@ -33,21 +33,15 @@ public class CitationGrabber {
         try {
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-            // optional default is GET
             con.setRequestMethod("GET");
-
             //add request header
             con.setRequestProperty("User-Agent", USER_AGENT);
             int responseCode = con.getResponseCode();
             System.out.println("\nSending 'GET' request to URL : " + url);
             System.out.println("Response Code : " + responseCode);
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
             StringBuilder response = new StringBuilder();
-
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
@@ -60,18 +54,13 @@ public class CitationGrabber {
             while (mat.find()) {
                 String pmid = mat.group(1);
                 builder.add(pmid);
-                System.out.println(pmid);
             }
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         return builder.build();
     }
-
-
 
 }
