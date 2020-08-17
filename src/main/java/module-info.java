@@ -5,9 +5,9 @@ module pubman {
     requires javafx.fxml;
     requires javafx.web;
     requires org.apache.logging.log4j;
-    requires guava;
+    requires com.google.common;
+    requires com.google.guice;
     requires slf4j.api;
-    requires guice;
     requires org.apache.commons.io;
     exports org.monarchinitiative.pubman;
     exports org.monarchinitiative.pubman.gui;

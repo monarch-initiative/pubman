@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -30,8 +31,9 @@ public class MainController implements Initializable {
     @FXML
     TextField pmidTextField;
 
-    @FXML
-    WebView mywebview;
+    @FXML WebView mywebview;
+    /** Limits for how many articles to retrieve. */
+    @FXML ComboBox<String> getpubmedCB;
 
     private WebEngine mywebengine;
 
@@ -75,6 +77,11 @@ public class MainController implements Initializable {
             PopupFactory.displayException("Error","Could not find citation file", e);
             return;
         }
+        getpubmedCB.getItems().add("All");
+        getpubmedCB.getItems().add("10");
+        getpubmedCB.getItems().add("20");
+        getpubmedCB.getItems().add("50");
+        getpubmedCB.getSelectionModel().select("All");
         ingestPubMedEntryList();
     }
 
@@ -151,34 +158,27 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
     }
 
 
 
     @FXML private void showEditCurrentPublicationMenuItemAction(ActionEvent e) {
         System.out.println("showEditCurrentPublicationMenuItemAction Menu Item Action");
-
         e.consume();
     }
 
     @FXML private void setResourcesMenuItemAction(ActionEvent e) {
         System.out.println("setResourcesMenuItemAction Menu Item Action");
-
         e.consume();
     }
 
     @FXML private void showCuratedPublicationsMenuItemAction(ActionEvent e) {
         System.out.println("showCuratedPublicationsMenuItemAction Menu Item Action");
-
         e.consume();
     }
 
     @FXML private void helpMenuItemAction(ActionEvent e) {
         System.out.println("help Menu Item Action");
-
         e.consume();
     }
 
@@ -205,9 +205,12 @@ public class MainController implements Initializable {
         try {
             PubMedSummaryRetriever pmretriever = new PubMedSummaryRetriever();
             String summary  = pmretriever.getSummary(pmid);
+            System.out.println("getPmid for " + pmid);
+            System.out.println("Summary:" +summary);
             //this.currentPubMedEntry = PubMedParser.parsePubMed(summary);
             PubmedXmlParser xmlParser = new PubmedXmlParser(summary);
             this.currentPubMedEntry = xmlParser.getCitation(); // can return null
+            System.out.println("curret PM entry: " + currentPubMedEntry.toString());
         } catch (PubmanException exc) {
             exc.printStackTrace();
             this.currentPubMedEntry=null;
@@ -241,8 +244,7 @@ public class MainController implements Initializable {
      */
     @FXML private void revisePMID(ActionEvent e) {
         this.currentSeenPmids.add(currentPubMedEntry.getPmid());
-
-        Item.Builder buiilder = new Item.Builder().
+        Item.Builder builder = new Item.Builder().
                 inhouse(this.inHouseCB.isSelected()).
                 hpo(this.hpoCB.isSelected()).
                 monarch(this.monarchCB.isSelected()).
@@ -260,7 +262,7 @@ public class MainController implements Initializable {
                 EHR(this.ehrCB.isSelected()).
                 entry(this.currentPubMedEntry);
         try {
-            Item item = buiilder.build();
+            Item item = builder.build();
             Item previousItem = getCurrentItem(currentPubMedEntry);
             logger.trace("Updating item {}", item.toLine());
             // this will replace the current item
@@ -308,8 +310,12 @@ public class MainController implements Initializable {
         this.monarchCB.setSelected(currentItem.isMonarch());
     }
 
-    @FXML private void addPMID(ActionEvent e) {
-
+    /**
+     * Called when the user clicks 'Add' to add a publication to the database.
+     * @param e an action event
+     */
+    @FXML
+    private void addPMID(ActionEvent e) {
         if (this.currentSeenPmids.contains(currentPubMedEntry.getPmid())) {
             updateWebview(getAlreadyExistsWarning());
             return;
@@ -337,6 +343,7 @@ public class MainController implements Initializable {
             Item item = buiilder.build();
             logger.trace("Adding item {}", item.toLine());
             this.itemList.add(item);
+            //showNext(e);
             updateWebview();
         } catch (IllegalArgumentException exc) {
             PopupFactory.displayError("Error with new item", exc.getMessage());
@@ -359,7 +366,6 @@ public class MainController implements Initializable {
     }
 
     private void updateWebview(String message) {
-//        logger.trace("updating webview, current pubmed entry is {}", currentPubMedEntry.toString());
         mywebview.setContextMenuEnabled(false);
         mywebengine = mywebview.getEngine();
         mywebengine.loadContent(message);
@@ -437,8 +443,9 @@ public class MainController implements Initializable {
             PopupFactory.displayMessage("Stack empty!","No more PMIDs to be fetched");
             return;
         }
+        System.out.println("[INFO] toBeFetchedStack has " + toBeFetchedStack.size() + " entries");
         String pmid = toBeFetchedStack.pop();
-        logger.trace("About to get next pmid: " + pmid);
+        System.out.println("About to get next pmid: " + pmid);
         fetchPmid(pmid);
         updateWebview();
     }
@@ -532,6 +539,16 @@ public class MainController implements Initializable {
         List<Item> coreitems = this.itemList.stream().filter(Item::isCore).collect(Collectors.toList());
         Set<String> newPmids=new HashSet<>();
         int alreadySeen=0;
+        int limit = 1_000_000;
+        int i = 0;
+        String value = this.getpubmedCB.getValue();
+        if (value.equals("10")) {
+            limit = 10;
+        } else if (value.equals("20")) {
+            limit = 20;
+        } else if (value.equals("50")) {
+            limit = 50;
+        }
         for (Item item : coreitems) {
             CitationGrabber grabber = new CitationGrabber(item.getPmid());
             List<String> citingPmids = grabber.citingPMIDs();
@@ -539,7 +556,10 @@ public class MainController implements Initializable {
                 if (this.currentSeenPmids.contains(pmid)) { alreadySeen++; continue; }
                 this.toBeFetchedStack.add(pmid);
                 citedByMap.put(pmid,item);
+                i++;
             }
+            if (i>limit)
+                break;
             Platform.runLater( () -> updateWebview(getCurrentNewCitationHTML()) );
             try {
                 Thread.sleep(1000);

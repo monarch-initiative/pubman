@@ -21,6 +21,8 @@ import static java.nio.charset.Charset.defaultCharset;
 
 public class PubmedXmlParser {
     private static final Logger LOGGER = LoggerFactory.getLogger(PubmedXmlParser.class);
+    // default value for pages
+    private static final String EMPTY_STRING = "";
     private String journal;
     private List<String> authorlist;
     /** Note that the lastAuthor element is also included in the authors so we do not need to use it.
@@ -28,14 +30,18 @@ public class PubmedXmlParser {
      */
     private String lastAuthor = null;
     private String title;
-    private String volume;
+    /** Initialize to empty string. Some XML entries seem to be missing this information. */
+    private String volume = EMPTY_STRING;
     private String year;
     private String issue;
-    private String pages;
+    /** Initialize to empty string. Some XML entries seem to be missing this information. */
+    private String pages = EMPTY_STRING;
     private String pmid;
+    private final String payload;
 
 
     public PubmedXmlParser(String payload) {
+        this.payload = payload;
         authorlist = new ArrayList<>();
        try {
            parse(payload);
@@ -126,16 +132,16 @@ public class PubmedXmlParser {
                             case "FullJournalName":
                             case "HasAbstract":
                             case "ELocationID":
+                            case "revised":
+                            case "accepted":
+                            case "mid":
                             case "SO":
                             case "received":
                                 break; // skip
                             default:
                                 LOGGER.error("Coud not find PubMed XML element: " + name);
-
                         }
                     }
-
-
                 }
             }
         }
@@ -158,9 +164,34 @@ public class PubmedXmlParser {
     }
 
 
+    private void dumpError(String err) {
+        System.err.println("[ERROR] ********************************************");
+        System.err.println("[ERROR] " + err);
+        System.err.println(payload);
+        System.err.println("[ERROR] ********************************************");
+    }
+
     public PubMedEntry getCitation() {
-        if (this.authorlist == null || this.title == null || this.journal == null || this.year == null ||
-        this.volume == null || this.pages == null || this.pmid == null) {
+        if (this.authorlist == null) {
+            dumpError("Authors list was null");
+            return null;
+        } else if (this.title == null) {
+            dumpError("Title was null");
+            return null;
+        } else if (this.journal == null) {
+            dumpError("Journal was null");
+            return null;
+        } else if (this.year == null) {
+            dumpError("Year was null");
+            return null;
+        } else if (this.volume == null) {
+            dumpError("Volume was null");
+            return null;
+        } else if (this.pages == null) {
+            dumpError("Pages was null");
+            return null;
+        } else if (this.pmid == null) {
+            dumpError("pmid was null");
             return null;
         }
         String authors = String.join(", ", this.authorlist);

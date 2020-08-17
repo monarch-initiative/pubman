@@ -57,10 +57,9 @@ public class CitationGrabber {
                 String pmid = mat.group(1);
                 builder.add(pmid);
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.printf("[ERROR] Could not retrieve citations: %s", e.getMessage());
         }
         return builder.build();
     }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE eSummaryResult PUBLIC "-//NLM//DTD esummary v1 20041029//EN"
+        "https://eutils.ncbi.nlm.nih.gov/eutils/dtd/20041029/esummary-v1.dtd">
+<eSummaryResult>
+    <DocSum>
+        <Id>31947757</Id>
+        <Item Name="PubDate" Type="Date">2020 Jan 3</Item>
+        <Item Name="EPubDate" Type="Date">2020 Jan 3</Item>
+        <Item Name="Source" Type="String">J Clin Med</Item>
+        <Item Name="AuthorList" Type="List">
+            <Item Name="Author" Type="String">Pereira R</Item>
+            <Item Name="Author" Type="String">Oliveira J</Item>
+            <Item Name="Author" Type="String">Sousa M</Item>
+        </Item>
+        <Item Name="LastAuthor" Type="String">Sousa M</Item>
+        <Item Name="Title" Type="String">Bioinformatics and Computational Tools for Next-Generation Sequencing Analysis in Clinical Genetics.</Item>
+        <Item Name="Volume" Type="String">9</Item>
+        <Item Name="Issue" Type="String">1</Item>
+        <Item Name="Pages" Type="String"></Item>
+        <Item Name="LangList" Type="List">
+            <Item Name="Lang" Type="String">English</Item>
+        </Item>
+        <Item Name="NlmUniqueID" Type="String">101606588</Item>
+        <Item Name="ISSN" Type="String"></Item>
+        <Item Name="ESSN" Type="String">2077-0383</Item>
+        <Item Name="PubTypeList" Type="List">
+            <Item Name="PubType" Type="String">Journal Article</Item>
+            <Item Name="PubType" Type="String">Review</Item> 	</Item>
+        <Item Name="RecordStatus" Type="String">PubMed</Item>
+        <Item Name="PubStatus" Type="String">epublish</Item>
+        <Item Name="ArticleIds" Type="List">
+            <Item Name="pubmed" Type="String">31947757</Item>
+            <Item Name="pii" Type="String">jcm9010132</Item>
+            <Item Name="doi" Type="String">10.3390/jcm9010132</Item>
+            <Item Name="pmc" Type="String">PMC7019349</Item>
+            <Item Name="rid" Type="String">31947757</Item>
+            <Item Name="eid" Type="String">31947757</Item>
+            <Item Name="pmcid" Type="String">pmc-id: PMC7019349;</Item> 	</Item>
+        <Item Name="DOI" Type="String">10.3390/jcm9010132</Item>
+        <Item Name="History" Type="List">
+            <Item Name="received" Type="Date">2019/11/18 00:00</Item>
+            <Item Name="revised" Type="Date">2019/12/15 00:00</Item>
+            <Item Name="accepted" Type="Date">2019/12/30 00:00</Item>
+            <Item Name="entrez" Type="Date">2020/01/18 06:00</Item>
+            <Item Name="pubmed" Type="Date">2020/01/18 06:00</Item>
+            <Item Name="medline" Type="Date">2020/01/18 06:01</Item> 	</Item>
+        <Item Name="References" Type="List"></Item>
+        <Item Name="HasAbstract" Type="Integer">1</Item>
+        <Item Name="PmcRefCount" Type="Integer">3</Item>
+        <Item Name="FullJournalName" Type="String">Journal of clinical medicine</Item>
+        <Item Name="ELocationID" Type="String">pii: E132. doi: 10.3390/jcm9010132</Item>
+        <Item Name="SO" Type="String">2020 Jan 3;9(1)</Item>
+    </DocSum>
+</eSummaryResult>
